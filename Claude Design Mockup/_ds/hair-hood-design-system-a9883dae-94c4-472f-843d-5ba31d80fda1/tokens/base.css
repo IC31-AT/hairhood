@@ -1,0 +1,15 @@
+/* Minimal element defaults. Consumers get sane type + link colours out of the box. */
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--type-body-family);font-size:var(--type-body-size);line-height:var(--type-body-lh);letter-spacing:var(--ls-body);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2{font-family:var(--type-heading-family);color:var(--text-strong);line-height:var(--lh-tight);letter-spacing:var(--ls-display);text-transform:uppercase;margin:0}
+h1{font-size:var(--fs-900)}h2{font-size:var(--fs-700)}
+h3{margin:0;font-family:var(--font-ui);font-size:var(--fs-400);line-height:var(--lh-snug);letter-spacing:var(--ls-ui);text-transform:uppercase;color:var(--text-strong)}
+p{margin:0 0 var(--stack) 0;max-width:var(--measure-prose)}
+a{color:var(--text-link);text-decoration:none;border-bottom:1px solid currentColor;transition:var(--transition-control)}
+a:hover{color:var(--text-link-hover)}
+::selection{background:var(--hh-black);color:var(--hh-white)}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.hh-logo{font-family:var(--font-logo);text-transform:uppercase;letter-spacing:var(--ls-logo);line-height:.9}
+.hh-eyebrow{font-family:var(--font-ui);font-size:var(--fs-100);letter-spacing:var(--ls-eyebrow);text-transform:uppercase;color:var(--text-muted)}
+.hh-motto{font-family:var(--font-script);font-size:var(--fs-700);line-height:1.1;letter-spacing:var(--ls-script);color:var(--text-strong)}
+.hh-price{font-family:var(--font-ui);letter-spacing:var(--ls-ui);color:var(--text-strong)}

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/borders.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/motion.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/base.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/styles.css">
+<script src="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#000;overflow-x:hidden}
+a{color:#fff}
+a:hover{color:var(--hh-brass-500)}
+.hh-scroll::-webkit-scrollbar{display:none}
+.hh-scroll{scrollbar-width:none;-ms-overflow-style:none}
+@keyframes hh-toast-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes hh-fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+button,[role="button"],a{min-height:auto}
+.hh-tap{min-height:44px}
+</style>
+</helmet>
+
+<div style="background:#000;min-height:100dvh;padding-bottom:calc(78px + env(safe-area-inset-bottom));border-left:1px solid var(--hh-brass-500);border-right:1px solid var(--hh-brass-500);box-sizing:border-box">
+
+<div class="hh-inverse" style="position:sticky;top:0;z-index:60;background:rgba(0,0,0,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.14);height:56px;display:flex;align-items:center;padding:0 16px">
+  <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-logo);font-size:24px;letter-spacing:var(--ls-logo);text-transform:uppercase;color:#fff">Hair Hood</a>
+  <button onClick="{{ toggleMenu }}" aria-label="Menu" class="hh-tap" style="margin-left:auto;width:44px;height:44px;background:none;border:none;display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:0">
+    <i style="display:block;height:2px;background:#fff"></i>
+    <i style="display:block;height:2px;background:#fff"></i>
+    <i style="display:block;height:2px;background:#fff"></i>
+  </button>
+</div>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="hh-inverse" style="position:fixed;inset:0;z-index:80;background:#000;display:flex;flex-direction:column;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));padding-bottom:calc(16px + env(safe-area-inset-bottom));overflow-y:auto;animation:hh-fade .18s cubic-bezier(.2,0,.2,1) both">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <span style="font-family:var(--font-logo);font-size:24px;letter-spacing:var(--ls-logo);text-transform:uppercase;color:#fff">Hair Hood</span>
+      <button onClick="{{ toggleMenu }}" aria-label="Close" class="hh-tap" style="width:44px;height:44px;background:none;border:none;color:#fff;font-family:var(--font-ui);font-size:18px;cursor:pointer">×</button>
+    </div>
+    <nav style="margin-top:24px;display:flex;flex-direction:column;gap:2px">
+      <sc-for list="{{ jumpNav }}" as="n" hint-placeholder-count="6">
+        <a href="#" onClick="{{ n.go }}" style="border:none;border-bottom:1px solid rgba(255,255,255,.14);padding:18px 0;font-family:var(--font-display);font-size:36px;line-height:.9;text-transform:uppercase;color:#fff">{{ n.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:12px">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" full="{{ true }}" onClick="{{ goBook }}" hint-size="100%,56px">Book Now</x-import>
+    </div>
+  </div>
+</sc-if>
+
+<main id="home-top">
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <section style="position:relative;background:#000;height:clamp(430px,60dvh,500px);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden">
+    <img src="uploads/hero.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;filter:grayscale(1) contrast(1.14)">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.25) 35%,rgba(0,0,0,.95) 100%)"></div>
+    <div style="position:relative;padding:0 20px clamp(24px,6vw,32px)">
+      <h1 style="margin:0;font-family:var(--font-display);font-size:clamp(46px,13vw,64px);line-height:.88;letter-spacing:.01em;text-transform:uppercase;color:#fff">Sharp,<br>every time</h1>
+      <div style="font-family:var(--font-script);font-size:clamp(24px,7vw,32px);line-height:1.05;color:#fff;margin-top:10px">Welcome to my hood</div>
+      <div style="margin-top:18px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" full="{{ true }}" onClick="{{ goBook }}" hint-size="100%,56px">Book Now</x-import>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" style="background:var(--hh-bone-050);padding:40px 0 44px">
+    <div style="padding:0 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+      <div>
+        <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(30px,9vw,38px);line-height:.9;text-transform:uppercase;color:var(--hh-black)">Meet the team</h2>
+      </div>
+      <a href="#" onClick="{{ goTeam }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black);white-space:nowrap">See all</a>
+    </div>
+    <div class="hh-scroll" style="margin-top:20px;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0">
+      <div style="flex:0 0 20px"></div>
+      <sc-for list="{{ team }}" as="b" hint-placeholder-count="4">
+        <div onClick="{{ b.pick }}" style="cursor:pointer;flex:0 0 128px;scroll-snap-align:start;display:flex;flex-direction:column;gap:8px">
+          <image-slot id="{{ b.photoId }}" shape="rect" style="width:128px;height:156px" placeholder="{{ b.name }} photo"></image-slot>
+          <div>
+            <div style="font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">{{ b.name }}</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px">{{ b.role }}</div>
+          </div>
+        </div>
+      </sc-for>
+      <div style="flex:0 0 8px"></div>
+    </div>
+  </section>
+
+  <section id="prices" style="background:var(--hh-white);padding:40px 0 44px">
+    <div style="padding:0 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+      <div>
+        <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(30px,9vw,38px);line-height:.9;text-transform:uppercase;color:var(--hh-black)">Cuts &amp; prices</h2>
+      </div>
+    </div>
+    <div class="hh-scroll" style="margin-top:20px;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0">
+      <div style="flex:0 0 20px"></div>
+      <sc-for list="{{ priceTeaser }}" as="p" hint-placeholder-count="4">
+        <div onClick="{{ p.book }}" style="cursor:pointer;flex:0 0 152px;scroll-snap-align:start;border-top:2px solid var(--hh-black);padding-top:14px">
+          <div style="font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)">From</div>
+          <div style="font-family:var(--font-ui);font-size:32px;letter-spacing:.01em;color:var(--hh-black);margin-top:2px">{{ p.price }}</div>
+          <div style="font-size:14px;color:var(--hh-black);margin-top:8px;line-height:1.2">{{ p.name }}</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px">{{ p.duration }}</div>
+        </div>
+      </sc-for>
+      <div style="flex:0 0 8px"></div>
+    </div>
+    <div style="padding:20px 20px 0">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="secondary" full="{{ true }}" onClick="{{ goServices }}" hint-size="100%,46px">See full price list</x-import>
+    </div>
+  </section>
+
+  <section id="insta" style="background:var(--hh-bone-050);padding:40px 0 44px">
+    <div style="padding:0 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+      <div>
+        <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(30px,9vw,38px);line-height:.9;text-transform:uppercase;color:var(--hh-black)">The work</h2>
+      </div>
+      <a href="#" onClick="{{ goGallery }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black);white-space:nowrap">See all</a>
+    </div>
+    <div style="margin-top:16px;padding:0 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
+      <div style="aspect-ratio:1/1;overflow:hidden"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+      <div style="aspect-ratio:1/1"><image-slot id="insta-2" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1"><image-slot id="insta-3" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1"><image-slot id="insta-4" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1;overflow:hidden"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;object-position:20% 40%;filter:grayscale(1)"></div>
+      <div style="aspect-ratio:1/1"><image-slot id="insta-6" shape="rect" placeholder="Photo"></image-slot></div>
+    </div>
+  </section>
+
+  <section id="reviews" class="hh-inverse" style="background:#000;padding:40px 0 44px">
+    <div style="padding:0 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+      <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(30px,9vw,38px);line-height:.9;text-transform:uppercase;color:#fff">From the chair</h2>
+      <a href="#" onClick="{{ goGallery }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300);white-space:nowrap">See all</a>
+    </div>
+    <div ref="{{ reviewsRef }}" class="hh-scroll" style="margin-top:20px;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0">
+      <div style="flex:0 0 20px"></div>
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="5">
+        <div style="flex:0 0 78%;scroll-snap-align:start;border-top:1px solid var(--hh-brass-500);padding-top:16px">
+          <p style="margin:0;font-size:16px;line-height:1.4;color:#fff">{{ r.quote }}</p>
+          <div style="margin-top:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">{{ r.who }}</div>
+        </div>
+      </sc-for>
+      <div style="flex:0 0 8px"></div>
+    </div>
+  </section>
+
+  <section id="visit" style="background:var(--surface-marble);padding:40px 0 44px">
+    <div style="padding:0 20px">
+      <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(30px,9vw,38px);line-height:.9;text-transform:uppercase;color:var(--hh-black)">Visit us</h2>
+      <div style="margin-top:20px;border-top:2px solid var(--hh-black);padding-top:16px">
+        <div style="font-size:15px;color:var(--hh-black);line-height:1.5">91B Whiteladies Road<br>Clifton, Bristol BS8 2NT</div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:6px;font-family:var(--font-ui);font-size:12px;letter-spacing:.02em;color:var(--text-body);line-height:1.9">
+          <sc-for list="{{ hours }}" as="h" hint-placeholder-count="4">
+            <div style="display:flex;justify-content:space-between;gap:12px">
+              <span style="text-transform:uppercase">{{ h.day }}</span>
+              <span>{{ h.hours }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:20px;position:relative;aspect-ratio:16/9;filter:grayscale(1) contrast(1.05)">
+          <iframe title="Hair Hood on Google Maps" src="https://www.google.com/maps?q=91B+Whiteladies+Road,+Bristol,+BS8+2NT&amp;output=embed" width="100%" height="100%" style="border:0;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div style="margin-top:14px">
+          <a href="https://maps.google.com/?q=91B+Whiteladies+Road+Bristol+BS8+2NT" target="_blank" rel="noopener" class="hh-tap" style="display:flex;align-items:center;border:none;font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black);text-decoration:underline">Get directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="background:#000;padding:28px 20px 32px">
+    <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">← Home</a>
+    <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(40px,12vw,56px);line-height:.88;text-transform:uppercase;color:#fff">Cuts &amp; prices</h1>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:8px 20px 100px">
+    <sc-for list="{{ groupedServices }}" as="g" hint-placeholder-count="5">
+      <div style="margin-top:32px;border-top:2px solid var(--hh-black);padding-top:12px">
+        <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(24px,7vw,30px);line-height:.9;text-transform:uppercase;color:var(--hh-black)">{{ g.label }}</h2>
+        <div style="margin-top:8px">
+          <sc-for list="{{ g.items }}" as="p" hint-placeholder-count="4">
+            <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.ServiceRow" name="{{ p.name }}" duration="{{ p.duration }}" price="{{ p.price }}" on-select="{{ p.book }}" hint-size="100%,64px"></x-import>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isGallery }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="background:#000;padding:28px 20px 32px">
+    <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">← Home</a>
+    <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(40px,12vw,56px);line-height:.88;text-transform:uppercase;color:#fff">Fresh out<br>the chair</h1>
+    <div style="margin-top:12px;display:flex;align-items:baseline;justify-content:space-between">
+      <a href="https://instagram.com" target="_blank" rel="noopener" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">@hairhood_</a>
+    </div>
+  </section>
+  <section style="background:#000;padding:0 0 60px">
+    <div style="padding:0 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
+      <div style="aspect-ratio:1/1;overflow:hidden"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+      <div style="aspect-ratio:1/1"><image-slot id="gallery-2" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1"><image-slot id="gallery-3" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1"><image-slot id="gallery-4" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1;overflow:hidden"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;object-position:20% 40%;filter:grayscale(1)"></div>
+      <div style="aspect-ratio:1/1"><image-slot id="gallery-6" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1"><image-slot id="gallery-7" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1"><image-slot id="gallery-8" shape="rect" placeholder="Photo"></image-slot></div>
+      <div style="aspect-ratio:1/1"><image-slot id="gallery-9" shape="rect" placeholder="Photo"></image-slot></div>
+    </div>
+    <p style="margin:20px 20px 0;font-size:12px;color:var(--hh-ink-300)">Grey tiles are placeholders — send the shoot and they drop straight in.</p>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:36px 20px 44px">
+    <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(30px,9vw,38px);line-height:.9;text-transform:uppercase;color:var(--hh-black)">From the chair</h2>
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:20px">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="5">
+        <div style="border-top:2px solid var(--hh-black);padding-top:14px">
+          <p style="margin:0;font-size:15px;line-height:1.5;color:var(--hh-black)">{{ r.quote }}</p>
+          <div style="margin-top:10px;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)">{{ r.who }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="position:relative;background:#000;height:clamp(320px,44dvh,380px);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden">
+    <img src="uploads/hero landscape.JPG" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 28%;filter:grayscale(1) contrast(1.1)">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.92))"></div>
+    <div style="position:relative;padding:0 20px 24px">
+      <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.7)">← Home</a>
+      <h1 style="margin:12px 0 0;font-family:var(--font-display);font-size:clamp(40px,12vw,56px);line-height:.88;text-transform:uppercase;color:#fff">About us</h1>
+    </div>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:28px 20px 48px">
+    <p style="margin-top:0;font-size:15px;line-height:1.6;color:var(--text-body)">Hi, and welcome to my hood. I'm Amir, and I've been barbering for over a decade.</p>
+    <p style="margin-top:12px;font-size:15px;line-height:1.6;color:var(--text-body)">My top priority is a quality, high-end service — while you stay comfortable and relaxed with a drink in hand.</p>
+    <div style="margin-top:20px;font-family:var(--font-script);font-size:clamp(26px,7vw,32px);color:var(--hh-black)">— Amir Baghery</div>
+    <div style="margin-top:28px;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:2px">
+      <div style="overflow:hidden;aspect-ratio:4/5"><img src="uploads/bar.JPG" alt="Amir cutting a client's hair" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12)"></div>
+      <div style="overflow:hidden;aspect-ratio:1/2"><img src="uploads/heo portrait.JPG" alt="Amir, street view" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.12)"></div>
+    </div>
+    <p style="margin-top:24px;font-size:17px;line-height:1.4;color:var(--hh-black)">A haircut is measurement, angle and pressure. Get those right and it grows out well for six weeks.</p>
+    <p style="margin-top:16px;font-size:15px;line-height:1.6;color:var(--text-body)">There's a bar at the back, monochrome prints on the wall, and a set of jewel-studded antlers nobody expects. Take a drink while you wait. Ask about any of it.</p>
+  </section>
+  <section id="team-section" style="background:var(--surface-marble);padding:36px 20px 44px">
+    <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(32px,10vw,42px);line-height:.9;text-transform:uppercase;color:var(--hh-black)">Meet the team</h2>
+    <div style="font-family:var(--font-script);font-size:clamp(22px,6vw,28px);color:var(--hh-black);margin-top:8px">know your barber</div>
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px">
+      <sc-for list="{{ team }}" as="b" hint-placeholder-count="4">
+        <div style="display:flex;gap:14px;border-top:2px solid var(--hh-black);padding-top:14px">
+          <image-slot id="{{ b.photoId }}-full" shape="rect" style="width:88px;height:104px;flex-shrink:0" placeholder="{{ b.name }} photo"></image-slot>
+          <div style="display:flex;flex-direction:column;justify-content:space-between;flex:1;min-width:0">
+            <div>
+              <div style="font-family:var(--font-ui);font-size:16px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">{{ b.name }}</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:2px">{{ b.role }}</div>
+            </div>
+            <div style="margin-top:10px">
+              <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="sm" onClick="{{ b.pick }}" hint-size="120px,36px">Book Now</x-import>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:28px">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" full="{{ true }}" onClick="{{ goBook }}" hint-size="100%,56px">Book Now</x-import>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="background:#000;padding:28px 20px 32px">
+    <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">← Home</a>
+    <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(40px,12vw,56px);line-height:.88;text-transform:uppercase;color:#fff">Contact &amp; FAQ</h1>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:28px 20px 8px">
+    <div style="border-top:2px solid var(--hh-black);padding-top:16px;display:flex;flex-direction:column;gap:10px">
+      <a href="tel:+447307453917" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;color:var(--hh-black)">07307 453917</a>
+      <span style="font-size:14px;color:var(--text-body);line-height:1.5;margin-top:4px">91B Whiteladies Road, Clifton, Bristol BS8 2NT</span>
+    </div>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:32px 20px 60px">
+    <div style="display:flex;flex-direction:column">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+        <div style="border-top:1px solid var(--border-hairline);padding:16px 0">
+          <div style="font-family:var(--font-ui);font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">{{ f.q }}</div>
+          <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:var(--text-body)">{{ f.a }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:8px 20px 44px">
+    <div style="border-top:2px solid var(--hh-black);padding-top:16px;display:flex;flex-direction:column;gap:16px">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Input" class-name="hh-input" label="Name" placeholder="Your name" value="{{ contactForm.name }}" onChange="{{ contactForm.setName }}" hint-size="100%,80px"></x-import>
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Input" class-name="hh-input" label="Message" placeholder="How can we help?" value="{{ contactForm.message }}" onChange="{{ contactForm.setMessage }}" hint-size="100%,80px"></x-import>
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" full="{{ true }}" disabled="{{ contactForm.disabled }}" onClick="{{ contactForm.submit }}" hint-size="100%,46px">Send</x-import>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="background:#000;padding:28px 20px 32px">
+    <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">← Home</a>
+    <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(40px,12vw,56px);line-height:.88;text-transform:uppercase;color:#fff">Privacy Policy</h1>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:8px 20px 48px">
+    <div style="border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Who we are</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Hair Hood, 91B Whiteladies Road, Clifton, Bristol BS8 2NT, is the data controller for this site.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">What we collect</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Name, phone number, email address and appointment details, submitted when you book. Anything you send us directly is also kept.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Why we use it</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">To create and manage bookings through Square, our booking and payments provider, to contact you about appointments, and to respond to enquiries.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Legal basis</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Performance of contract — fulfilling your booking. Anything beyond that only happens with your consent.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Who we share it with</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Square processes and stores booking data on our behalf. Google receives aggregated data for ad performance measurement — see our <a href="#" onClick="{{ goCookies }}" style="color:var(--hh-black);text-decoration:underline">Cookie Policy</a>. We don't sell your data.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">How long we keep it</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">While you're an active customer, plus 2 years afterwards for record-keeping. Then it's deleted.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Your rights</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">You can ask to access, correct, delete or object to how we use your data. Use the <a href="#" onClick="{{ goContact }}" style="color:var(--hh-black);text-decoration:underline">contact form</a> on our Contact &amp; FAQ page, or complain to the ICO at ico.org.uk.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Changes</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">We'll update this policy if how we handle your data changes.</p>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isCookies }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="background:#000;padding:28px 20px 32px">
+    <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">← Home</a>
+    <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(40px,12vw,56px);line-height:.88;text-transform:uppercase;color:#fff">Cookie Policy</h1>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:8px 20px 48px">
+    <div style="border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Essential</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Required for the site and booking flow to work. These can't be disabled.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Analytics</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Google Analytics — page views and traffic sources. Only runs if you accept all cookies.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Advertising</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Google Ads conversion tracking — measures whether an ad led to a booking. Only runs if you accept all cookies.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Managing consent</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Consent is handled by CookieYes. Analytics and advertising scripts only fire once you accept all cookies, and the full cookie list here stays current automatically.</p>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isTerms }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="background:#000;padding:28px 20px 32px">
+    <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">← Home</a>
+    <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(40px,12vw,56px);line-height:.88;text-transform:uppercase;color:#fff">Booking Terms</h1>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:8px 20px 48px">
+    <div style="border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Confirmation</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Bookings made through the site are confirmed instantly.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Cancellations</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">Give at least 24 hours' notice to cancel or reschedule.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Arriving late</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">More than 10 minutes late and your appointment may be shortened or rebooked, depending on availability.</p>
+    </div>
+    <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+      <div style="font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-black)">Right to refuse</div>
+      <p style="margin-top:10px;font-size:14px;line-height:1.6;color:var(--text-body)">We reserve the right to decline a booking at our discretion.</p>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hours-today="{{ statusLabel }}" on-home="{{ goHome }}" on-team="{{ goTeam }}" on-gallery="{{ goGallery }}" on-prices="{{ goServices }}" on-contact="{{ goContact }}" on-book-service="{{ startBookingByService }}" on-book-barber="{{ goBook }}" on-book-any="{{ startBookingAny }}" on-privacy="{{ goPrivacy }}" on-cookies="{{ goCookies }}" on-terms="{{ goTerms }}" hint-size="100%,560px"></dc-import>
+</sc-if>
+
+<sc-if value="{{ isBook }}" hint-placeholder-val="{{ false }}">
+  <section class="hh-inverse" style="background:#000;padding:24px 20px 24px">
+    <a href="#" onClick="{{ book.back }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">← Back</a>
+    <h1 style="margin:14px 0 0;font-family:var(--font-display);font-size:clamp(32px,10vw,44px);line-height:.9;text-transform:uppercase;color:#fff">{{ book.stepTitle }}</h1>
+    <div style="margin-top:16px;height:3px;background:var(--hh-ink-700);position:relative">
+      <i style="position:absolute;top:0;bottom:0;left:0;width:{{ book.progress }};background:var(--hh-brass-500);display:block;transition:width .22s cubic-bezier(.2,0,.2,1)"></i>
+    </div>
+  </section>
+
+  <section style="background:var(--hh-bone-050);padding:24px 20px 40px">
+    <sc-if value="{{ book.atBarber }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+        <sc-if value="{{ book.hasAnyOption }}" hint-placeholder-val="{{ true }}">
+          <div onClick="{{ book.pickAny }}" style="cursor:pointer;display:flex;flex-direction:column;border:1px solid var(--border-hairline)">
+            <div style="aspect-ratio:3/4;background:var(--hh-ink-800);display:flex;align-items:flex-end;padding:10px;font-family:var(--font-ui);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--hh-ink-300)">Any barber</div>
+            <div style="padding:12px 12px 14px;display:flex;flex-direction:column;gap:6px">
+              <div style="font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">Any barber</div>
+              <div style="font-size:11px;color:var(--text-muted)">First free chair</div>
+              <div style="margin-top:6px;background:var(--hh-black);color:#fff;text-align:center;padding:9px 0;font-family:var(--font-ui);font-size:10px;letter-spacing:.06em;text-transform:uppercase">Choose</div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-for list="{{ book.barberChoices }}" as="b" hint-placeholder-count="4">
+          <div style="min-width:0">
+            <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.BarberCard" name="{{ b.name }}" role="{{ b.role }}" signature="{{ b.name }}" note="{{ b.note }}" photo-label="Photo" on-book="{{ b.pick }}" hint-size="100%,300px"></x-import>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ book.atService }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ book.serviceChoices }}" as="sv" hint-placeholder-count="6">
+          <div onClick="{{ sv.pick }}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border-hairline);padding:16px 0">
+            <div>
+              <div style="font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">{{ sv.name }}</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-top:2px">{{ sv.duration }}</div>
+            </div>
+            <div style="font-family:var(--font-ui);font-size:16px;color:var(--hh-black);white-space:nowrap">{{ sv.price }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ book.atAddons }}" hint-placeholder-val="{{ false }}">
+      <p style="margin:0 0 16px;font-size:13px;color:var(--text-muted)">Optional — skip if you don't need them.</p>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ book.addonChoices }}" as="a" hint-placeholder-count="3">
+          <div onClick="{{ a.toggle }}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border-hairline);padding:16px 0">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:20px;height:20px;border:1.5px solid var(--hh-black);background:{{ a.boxBg }};flex-shrink:0"></div>
+              <div style="font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">{{ a.name }}</div>
+            </div>
+            <div style="font-family:var(--font-ui);font-size:14px;color:var(--hh-black);white-space:nowrap">{{ a.price }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:20px;border-top:2px solid var(--hh-black);padding-top:12px;display:flex;justify-content:space-between;font-family:var(--font-ui);font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">
+        <span>Running total</span><span>{{ book.runningTotal }}</span>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ book.atTime }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ book.days }}" as="d" hint-placeholder-count="7">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Tag" selected="{{ d.on }}" onClick="{{ d.pick }}" hint-size="80px,32px">{{ d.label }}</x-import>
+        </sc-for>
+      </div>
+      <div style="margin-top:28px;border-top:2px solid var(--hh-black);padding-top:16px">
+        <sc-if value="{{ book.hasSlots }}" hint-placeholder-val="{{ true }}">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.TimeSlotGrid" slots="{{ book.slots }}" value="{{ book.time }}" on-change="{{ book.setTime }}" columns="3" style="margin-top:16px" hint-size="100%,160px"></x-import>
+        </sc-if>
+        <sc-if value="{{ book.hasSlots }}" hint-placeholder-val="{{ true }}" invert="{{ true }}">
+          <p style="margin-top:16px;font-size:14px;color:var(--text-muted)">Nothing left on this day. Try tomorrow.</p>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ book.atDetails }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Input" class-name="hh-input" label="Name" placeholder="Your name" value="{{ book.name }}" onChange="{{ book.setName }}" hint-size="100%,80px"></x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Input" class-name="hh-input" label="Mobile" type="tel" input-mode="tel" placeholder="07…" hint="We'll text you the day before." value="{{ book.phone }}" onChange="{{ book.setPhone }}" hint-size="100%,80px"></x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Input" class-name="hh-input" label="Email (optional)" type="email" placeholder="you@email.com" value="{{ book.email }}" onChange="{{ book.setEmail }}" hint-size="100%,80px"></x-import>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ book.atReview }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;border-top:2px solid var(--hh-black);padding-top:12px"><span style="font-size:13px;color:var(--text-muted)">Barber</span><span style="font-family:var(--font-ui);font-size:13px;text-transform:uppercase;color:var(--hh-black)">{{ book.summaryBarber }}</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:13px;color:var(--text-muted)">Service</span><span style="font-family:var(--font-ui);font-size:13px;text-transform:uppercase;color:var(--hh-black)">{{ book.summaryService }}</span></div>
+        <sc-if value="{{ book.hasAddonsSummary }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-size:13px;color:var(--text-muted)">Add-ons</span><span style="font-family:var(--font-ui);font-size:13px;text-transform:uppercase;color:var(--hh-black);text-align:right">{{ book.summaryAddons }}</span></div>
+        </sc-if>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:13px;color:var(--text-muted)">When</span><span style="font-family:var(--font-ui);font-size:13px;text-transform:uppercase;color:var(--hh-black)">{{ book.summaryWhen }}</span></div>
+        <div style="display:flex;justify-content:space-between;border-top:2px solid var(--hh-black);padding-top:12px;margin-top:6px"><span style="font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">Total (in-shop)</span><span style="font-family:var(--font-ui);font-size:20px;color:var(--hh-black)">{{ book.summaryTotal }}</span></div>
+        <p style="margin-top:4px;font-size:12px;color:var(--text-muted)">Payment is taken in the shop. This just holds your chair.</p>
+      </div>
+      <sc-if value="{{ book.timeConflict }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:24px;border-top:2px solid var(--hh-black);padding-top:14px">
+          <div style="font-family:var(--font-ui);font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">That time just got taken</div>
+          <p style="margin-top:8px;font-size:13px;color:var(--text-muted)">Nearest times still open:</p>
+          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ book.altTimes }}" as="t" hint-placeholder-count="3">
+              <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Tag" onClick="{{ t.pick }}" hint-size="70px,32px">{{ t.label }}</x-import>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ book.atDone }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:var(--font-script);font-size:clamp(30px,8vw,40px);line-height:1.05;color:var(--hh-black)">Welcome to my hood</div>
+      <p style="margin-top:16px;font-size:15px;line-height:1.5;color:var(--text-body)">{{ book.summaryWhen }} with {{ book.summaryBarber }}. We'll text you the day before.</p>
+      <div style="margin-top:16px;border-top:2px solid var(--hh-black);padding-top:12px;font-family:var(--font-ui);font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--text-muted)">Reference <span style="color:var(--hh-black)">{{ book.ref }}</span></div>
+      <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" full="{{ true }}" onClick="{{ goHome }}" hint-size="100%,46px">Back to the shop</x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="secondary" full="{{ true }}" onClick="{{ book.restart }}" hint-size="100%,46px">Book another</x-import>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ book.atDeclined }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:2px solid var(--hh-black);padding-top:14px">
+        <div style="font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">Unable to complete this booking online</div>
+        <p style="margin-top:10px;font-size:14px;line-height:1.5;color:var(--text-body)">Please call the shop to finish booking your chair.</p>
+      </div>
+      <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" full="{{ true }}" onClick="{{ book.callShop }}" hint-size="100%,46px">Call the shop</x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="secondary" full="{{ true }}" onClick="{{ goHome }}" hint-size="100%,46px">Back to the shop</x-import>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ book.showNav }}" hint-placeholder-val="{{ true }}">
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:12px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" full="{{ true }}" disabled="{{ book.nextDisabled }}" onClick="{{ book.next }}" hint-size="100%,56px">{{ book.nextLabel }}</x-import>
+        <sc-if value="{{ book.atAddons }}" hint-placeholder-val="{{ false }}">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="ghost" full="{{ true }}" onClick="{{ book.skipAddons }}" hint-size="100%,44px">Skip</x-import>
+        </sc-if>
+      </div>
+    </sc-if>
+  </section>
+</sc-if>
+</main>
+
+<sc-if value="{{ toast.show }}" hint-placeholder-val="{{ false }}">
+  <div class="hh-inverse" style="position:fixed;left:16px;right:16px;bottom:{{ toastBottom }};z-index:75;background:#000;border:1px solid var(--hh-brass-500);padding:14px 16px;font-family:var(--font-ui);font-size:12px;letter-spacing:.02em;color:#fff;animation:hh-toast-in .18s cubic-bezier(.2,0,.2,1) both">{{ toast.msg }}</div>
+</sc-if>
+
+<sc-if value="{{ showCookieBanner }}" hint-placeholder-val="{{ false }}">
+  <div class="hh-inverse" style="position:fixed;left:0;right:0;bottom:calc(78px + env(safe-area-inset-bottom));z-index:71;background:#000;border-top:1px solid var(--hh-brass-500);padding:16px 20px;display:flex;flex-direction:column;gap:12px">
+    <p style="margin:0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.85)">We use cookies to run this site and to see how our ads are performing. You can accept all cookies or continue with essential only.</p>
+    <div style="display:flex;gap:10px">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" full="{{ true }}" onClick="{{ acceptAllCookies }}" hint-size="100%,44px">Accept all</x-import>
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="secondary" full="{{ true }}" onClick="{{ essentialOnlyCookies }}" hint-size="100%,44px">Essential only</x-import>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ stickyBarEnabled }}" hint-placeholder-val="{{ true }}">
+  <div class="hh-inverse" style="position:fixed;left:0;right:0;bottom:0;z-index:70;background:#000;border-top:1px solid var(--hh-brass-500);padding:10px 16px calc(10px + env(safe-area-inset-bottom))">
+    <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" full="{{ true }}" onClick="{{ goBook }}" hint-size="100%,46px">Book Now</x-import>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;stickyBarEnabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;autoplayReviews&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, route: "home", toast: { show: false, msg: "" }, book: this.freshBookState(), contact: { name: "", message: "" }, cookieChoice: null };
+
+  componentDidMount() {
+    try { const saved = localStorage.getItem("hh_cookie_consent"); if (saved) this.setState({ cookieChoice: saved }); } catch (e) {}
+  }
+
+  setCookieChoice(choice) {
+    try { localStorage.setItem("hh_cookie_consent", choice); } catch (e) {}
+    this.setState({ cookieChoice: choice });
+  }
+
+  freshBookState() {
+    return { step: "barber", history: [], barberId: null, filterServiceId: null, serviceId: null, addOns: [], day: 0, time: null, name: "", phone: "", email: "", timeConflict: false, altTimes: [], ref: null, serviceFirst: false };
+  }
+
+  BARBERS = [
+    { id: "amir", name: "Amir", role: "Owner · Senior Barber", note: "Skin fades and cutthroat work." },
+    { id: "hamid", name: "Hamid", role: "Junior Barber", note: "Fades taken clean to the skin." },
+    { id: "saahil", name: "Saahil", role: "Apprentice Barber", note: "Crops, tapers and steady hands." },
+    { id: "arthur", name: "Arthur", role: "Barber", note: "Classic cuts and beard shaping." }
+  ];
+
+  BASE_SERVICES = [
+    { id: "haircut", name: "Haircut", addOns: ["beardline", "hottowelfinish"] },
+    { id: "skinfade", name: "Skin Fade", addOns: ["beardline", "hottowelfinish"] },
+    { id: "taper", name: "Taper Fade", addOns: ["beardline", "hottowelfinish"] },
+    { id: "scissor", name: "Scissor Cut", addOns: ["beardline"] },
+    { id: "beard", name: "Beard Trim", addOns: [] },
+    { id: "hottowel", name: "Hot Towel Shave", addOns: [] }
+  ];
+
+  BARBER_PRICING = {
+    amir: { haircut: [24, 20], skinfade: [29, 40], taper: [26, 30], scissor: [25, 25], beard: [15, 15], hottowel: [25, 40] },
+    hamid: { haircut: [20, 25], skinfade: [24, 45], taper: [22, 35], scissor: [21, 30], beard: [13, 20] },
+    saahil: { haircut: [15, 30], taper: [18, 40], scissor: [16, 35], beard: [10, 20] },
+    arthur: { haircut: [22, 25], skinfade: [27, 45], taper: [24, 35], scissor: [23, 30], beard: [15, 20], hottowel: [25, 40] }
+  };
+
+  ADDONS = {
+    beardline: { name: "Beard line-up", price: 8, duration: 10, barbers: ["amir", "hamid", "arthur"] },
+    hottowelfinish: { name: "Hot towel finish", price: 6, duration: 10, barbers: ["amir", "arthur"] }
+  };
+
+  slotTimes = ["09:00", "09:45", "10:30", "11:15", "12:00", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00"];
+
+  services = [
+    { name: "Haircut", cat: "cuts", duration: "20–30 min", price: "£22", bookId: "haircut" },
+    { name: "Skin fade", cat: "cuts", duration: "40–50 min", price: "£27", bookId: "skinfade" },
+    { name: "Taper fade", cat: "cuts", duration: "30–40 min", price: "£24", bookId: "taper" },
+    { name: "Scissor cut", cat: "cuts", duration: "25–35 min", price: "£23", bookId: "scissor" },
+    { name: "Crew cut", cat: "cuts", duration: "15–25 min", price: "£15", bookId: "haircut" },
+    { name: "Long hair", cat: "cuts", duration: "45–55 min", price: "£29", bookId: "haircut" },
+    { name: "Haircut & beard trim", cat: "beards", duration: "35–45 min", price: "£30", bookId: "haircut" },
+    { name: "Skin fade & beard trim", cat: "beards", duration: "50–60 min", price: "£35", bookId: "skinfade" },
+    { name: "Beard trim", cat: "beards", duration: "15–25 min", price: "£15", bookId: "beard" },
+    { name: "Haircut & hot towel shave", cat: "shaves", duration: "45–55 min", price: "£35", bookId: "hottowel" },
+    { name: "Hot towel face shave", cat: "shaves", duration: "40 min", price: "£25", bookId: "hottowel" },
+    { name: "Hot towel head shave", cat: "shaves", duration: "40 min", price: "£25", bookId: "hottowel" },
+    { name: "Student haircut", cat: "students", duration: "20–30 min", price: "£20", bookId: "haircut" },
+    { name: "Student skin fade", cat: "students", duration: "40–50 min", price: "£25", bookId: "skinfade" }
+  ];
+  catLabels = { cuts: "Cuts", beards: "Beards", shaves: "Hot towel shaves", students: "Students" };
+
+  faqs = [
+    { q: "Do you take walk-ins?", a: "Welcome when a chair is free. Friday and Saturday, book ahead." },
+    { q: "Do you offer a student price?", a: "Yes — reduced prices on cuts, fades and tapers. Bring your card." },
+    { q: "How do I pay?", a: "Card and cash. Booking deposits are taken through Square." },
+    { q: "Do I need to book?", a: "Booking is safer, especially at weekends, but walk-ins are always welcome when there's a free chair." }
+  ];
+
+  priceTeaser = [
+    { name: "Skin fade", price: "£27", duration: "40–50 min", bookId: "skinfade" },
+    { name: "Haircut", price: "£22", duration: "20–30 min", bookId: "haircut" },
+    { name: "Beard trim", price: "£15", duration: "15–25 min", bookId: "beard" },
+    { name: "Hot towel shave", price: "£25", duration: "40 min", bookId: "hottowel" }
+  ];
+
+  reviews = [
+    { quote: "“Great, expert, friendly and welcoming service from Amir — we will definitely be back!”", who: "Daniel R." },
+    { quote: "“Best fade I've had in Bristol. Clean lines, no rushing.”", who: "Sam K." },
+    { quote: "“Hamid took real care with a tricky beard line. Spot on.”", who: "Josh M." },
+    { quote: "“Books up fast for a reason. Worth the wait.”", who: "Alex P." },
+    { quote: "“Walked in nervous about a skin fade, walked out delighted.”", who: "Tom H." }
+  ];
+
+  hoursData = [
+    { day: "Monday", open: [10, 0], close: [18, 0], label: "10:00 – 18:00" },
+    { day: "Tuesday", open: [9, 0], close: [19, 0], label: "09:00 – 19:00" },
+    { day: "Wednesday", open: [9, 0], close: [19, 0], label: "09:00 – 19:00" },
+    { day: "Thursday", open: [9, 0], close: [19, 0], label: "09:00 – 19:00" },
+    { day: "Friday", open: [9, 0], close: [19, 0], label: "09:00 – 19:00" },
+    { day: "Saturday", open: [9, 0], close: [17, 0], label: "09:00 – 17:00" },
+    { day: "Sunday", label: "Closed" }
+  ];
+
+  componentDidMount() {
+    this.reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!this.reduceMotion && (this.props.autoplayReviews ?? true)) this.startAutoplay();
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 1);
+      requestAnimationFrame(() => window.scrollTo(0, 0));
+    });
+  }
+  componentWillUnmount() {
+    this.stopAutoplay();
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+  }
+
+  startAutoplay() {
+    this._autoplay = setInterval(() => {
+      const el = this._reviewsEl;
+      if (!el) return;
+      const card = el.firstElementChild;
+      const step = card ? card.getBoundingClientRect().width + 12 : 260;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + step, behavior: "smooth" });
+    }, 4200);
+    ["pointerdown", "wheel"].forEach((ev) => {
+      if (this._reviewsEl) this._reviewsEl.addEventListener(ev, () => this.stopAutoplay(), { once: true, passive: true });
+    });
+  }
+  stopAutoplay() { if (this._autoplay) clearInterval(this._autoplay); }
+
+  showToast(msg) {
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+    this.setState({ toast: { show: true, msg } });
+    this._toastTimer = setTimeout(() => this.setState({ toast: { show: false, msg: "" } }), 3200);
+  }
+
+  scrollToId(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 56;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+
+  goRoute(route) { this.setState({ route, menuOpen: false }); window.scrollTo(0, 0); }
+
+  // ---- booking helpers ----
+  eligibleBarbersForService(serviceId) {
+    return this.BARBERS.filter((b) => this.BARBER_PRICING[b.id] && this.BARBER_PRICING[b.id][serviceId]);
+  }
+  eligibleAddonIds(serviceId, barberId) {
+    const svc = this.BASE_SERVICES.find((s) => s.id === serviceId);
+    if (!svc) return [];
+    return svc.addOns.filter((aid) => {
+      const addon = this.ADDONS[aid];
+      if (!barberId || barberId === "any") return addon.barbers.some((bb) => this.BARBER_PRICING[bb] && this.BARBER_PRICING[bb][serviceId]);
+      return addon.barbers.includes(barberId);
+    });
+  }
+  minPrice(serviceId) {
+    const elig = this.eligibleBarbersForService(serviceId);
+    return Math.min(...elig.map((b) => this.BARBER_PRICING[b.id][serviceId][0]));
+  }
+  resolveBarber(book) {
+    if (book.barberId && book.barberId !== "any") return this.BARBERS.find((b) => b.id === book.barberId);
+    const elig = this.eligibleBarbersForService(book.serviceId).filter((b) =>
+      book.addOns.every((aid) => this.ADDONS[aid].barbers.includes(b.id))
+    );
+    return elig[0] || this.eligibleBarbersForService(book.serviceId)[0];
+  }
+  serviceName(id) { const s = this.BASE_SERVICES.find((x) => x.id === id); return s ? s.name : ""; }
+
+  goToBookStep(step) {
+    this.setState((s) => ({ book: { ...s.book, step, history: [...s.book.history, s.book.step] } }));
+  }
+
+  startBooking(filterServiceId) {
+    const b = this.freshBookState();
+    b.filterServiceId = filterServiceId || null;
+    this.setState({ route: "book", menuOpen: false, book: b });
+    window.scrollTo(0, 0);
+  }
+  startBookingWithBarber(barberId) {
+    const b = this.freshBookState();
+    b.barberId = barberId;
+    b.step = "service";
+    this.setState({ route: "book", menuOpen: false, book: b });
+    window.scrollTo(0, 0);
+  }
+
+  pickBarber(barberId) {
+    const book = this.state.book;
+    if (book.filterServiceId) {
+      const serviceId = book.filterServiceId;
+      const addonsExist = this.eligibleAddonIds(serviceId, barberId).length > 0;
+      this.setState((s) => ({ book: { ...s.book, barberId, serviceId, history: [...s.book.history, "barber"], step: addonsExist ? "addons" : "time" } }));
+    } else {
+      this.setState((s) => ({ book: { ...s.book, barberId, history: [...s.book.history, "barber"], step: "service" } }));
+    }
+  }
+  pickService(serviceId) {
+    const book = this.state.book;
+    if (book.serviceFirst && !book.barberId) {
+      this.setState((s) => ({ book: { ...s.book, serviceId, filterServiceId: serviceId, history: [...s.book.history, "service"], step: "barber" } }));
+      return;
+    }
+    const addonsExist = this.eligibleAddonIds(serviceId, book.barberId).length > 0;
+    this.setState((s) => ({ book: { ...s.book, serviceId, addOns: [], history: [...s.book.history, "service"], step: addonsExist ? "addons" : "time" } }));
+  }
+  toggleAddon(aid) {
+    this.setState((s) => {
+      const has = s.book.addOns.includes(aid);
+      return { book: { ...s.book, addOns: has ? s.book.addOns.filter((x) => x !== aid) : [...s.book.addOns, aid] } };
+    });
+  }
+
+  daysArray(book) {
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const base = new Date();
+    const out = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(base.getTime() + i * 86400000);
+      const label = i === 0 ? "Today" : i === 1 ? "Tomorrow" : dayNames[d.getDay()].slice(0, 3) + " " + d.getDate();
+      out.push({ i, label, full: dayNames[d.getDay()] + " " + d.getDate() });
+    }
+    return out;
+  }
+
+  attemptConfirm() {
+    const book = this.state.book;
+    if (!book.timeConflict && Math.random() < 0.25) {
+      const dayIdx = book.day;
+      const alts = this.slotTimes.filter((t, i) => t !== book.time && (i + dayIdx) % 4 !== 0).slice(0, 3);
+      this.setState((s) => ({ book: { ...s.book, timeConflict: true, altTimes: alts } }));
+      return;
+    }
+    if (Math.random() < 0.12) {
+      this.setState((s) => ({ book: { ...s.book, step: "declined", history: [...s.book.history, "review"] } }));
+      return;
+    }
+    const ref = "HH-" + Math.random().toString(36).slice(2, 7).toUpperCase();
+    this.setState((s) => ({ book: { ...s.book, step: "done", ref } }));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const now = new Date();
+    const todayIdx = now.getDay();
+    const todayData = this.hoursData[todayIdx === 0 ? 6 : todayIdx - 1];
+    let isOpen = false;
+    let statusLabel = "Closed today";
+    if (todayData.open) {
+      const mins = now.getHours() * 60 + now.getMinutes();
+      const openMins = todayData.open[0] * 60 + todayData.open[1];
+      const closeMins = todayData.close[0] * 60 + todayData.close[1];
+      isOpen = mins >= openMins && mins < closeMins;
+      statusLabel = isOpen
+        ? "Open now · closes " + String(todayData.close[0]).padStart(2, "0") + ":" + String(todayData.close[1]).padStart(2, "0")
+        : mins < openMins
+        ? "Opens today at " + String(todayData.open[0]).padStart(2, "0") + ":" + String(todayData.open[1]).padStart(2, "0")
+        : "Closed now";
+    }
+
+    const jumpNav = [
+      { label: "Home", go: (e) => { if (e) e.preventDefault(); this.goRoute("home"); } },
+      { label: "Meet the Team", go: (e) => { if (e) e.preventDefault(); this.goRoute("about"); } },
+      { label: "Gallery & Reviews", go: (e) => { if (e) e.preventDefault(); this.goRoute("gallery"); } },
+      { label: "Prices", go: (e) => { if (e) e.preventDefault(); this.goRoute("services"); } }
+    ];
+
+    const groupedServices = ["cuts", "beards", "shaves", "students"].map((c) => ({
+      label: this.catLabels[c],
+      items: this.services.filter((x) => x.cat === c).map((x) => ({ name: x.name, duration: x.duration, price: x.price, book: () => this.startBooking(x.bookId) }))
+    }));
+
+    const team = this.BARBERS.map((b) => ({ name: b.name, role: b.role, photoId: "team-" + b.id, pick: () => this.startBookingWithBarber(b.id) }));
+
+    // ---- booking flow derived values ----
+    const book = s.book;
+    const stepTitles = { barber: "Choose a barber", service: "Choose a service", addons: "Add-ons", time: "Pick a date & time", details: "Your details", review: "Review & confirm", done: "You're in.", declined: "Can't book online" };
+    const order = book.serviceFirst ? ["service", "barber", "addons", "time", "details", "review"] : ["barber", "service", "addons", "time", "details", "review"];
+    const stepIdx = order.indexOf(book.step);
+    const progress = (book.step === "done" || book.step === "declined") ? "100%" : Math.round(((stepIdx + 1) / order.length) * 100) + "%";
+
+    const barberChoices = (book.filterServiceId ? this.eligibleBarbersForService(book.filterServiceId) : this.BARBERS).map((b) => ({
+      name: b.name, role: b.role, note: b.note, pick: () => this.pickBarber(b.id)
+    }));
+
+    const availableServiceIds = book.barberId && book.barberId !== "any"
+      ? this.BASE_SERVICES.filter((sv) => this.BARBER_PRICING[book.barberId][sv.id]).map((sv) => sv.id)
+      : this.BASE_SERVICES.filter((sv) => this.eligibleBarbersForService(sv.id).length > 0).map((sv) => sv.id);
+    const serviceChoices = availableServiceIds.map((id) => {
+      const svc = this.BASE_SERVICES.find((x) => x.id === id);
+      const specific = book.barberId && book.barberId !== "any";
+      const price = specific ? "£" + this.BARBER_PRICING[book.barberId][id][0] : "from £" + this.minPrice(id);
+      const duration = specific ? this.BARBER_PRICING[book.barberId][id][1] + " min" : "varies by barber";
+      return { name: svc.name, price, duration, pick: () => this.pickService(id) };
+    });
+
+    const addonIds = book.serviceId ? this.eligibleAddonIds(book.serviceId, book.barberId) : [];
+    const addonChoices = addonIds.map((aid) => {
+      const addon = this.ADDONS[aid];
+      const selected = book.addOns.includes(aid);
+      return { name: addon.name, price: "+£" + addon.price, boxBg: selected ? "var(--hh-black)" : "transparent", toggle: () => this.toggleAddon(aid) };
+    });
+    const basePrice = book.serviceId ? (book.barberId && book.barberId !== "any" ? this.BARBER_PRICING[book.barberId][book.serviceId][0] : this.minPrice(book.serviceId)) : 0;
+    const addonsTotal = book.addOns.reduce((sum, aid) => sum + this.ADDONS[aid].price, 0);
+    const runningTotal = "£" + (basePrice + addonsTotal);
+
+    const days = this.daysArray(book).map((d) => ({ label: d.label, full: d.full, on: book.day === d.i, pick: () => this.setState((st) => ({ book: { ...st.book, day: d.i, time: null } })) }));
+    const closedToday = this.daysArray(book)[book.day] && ["Sunday"].includes(this.daysArray(book)[book.day].full.split(" ")[0]);
+    const slots = closedToday ? [] : this.slotTimes.map((t, i) => ({ time: t, taken: (i + book.day) % 4 === 0 }));
+
+    const resolvedBarber = book.serviceId ? this.resolveBarber(book) : null;
+    const summaryBarber = book.barberId === "any" ? "First available (" + (resolvedBarber ? resolvedBarber.name : "—") + ")" : (resolvedBarber ? resolvedBarber.name : "—");
+    const summaryService = this.serviceName(book.serviceId);
+    const summaryAddons = book.addOns.map((aid) => this.ADDONS[aid].name).join(", ");
+    const dayLabel = this.daysArray(book)[book.day] ? this.daysArray(book)[book.day].full : "";
+    const summaryWhen = [dayLabel, book.time || ""].filter(Boolean).join(" · ");
+    const summaryTotal = runningTotal;
+
+    const nextLabelMap = { addons: "Continue", time: "Continue", details: "Review booking", review: "Confirm booking" };
+    const nextDisabledMap = {
+      addons: false,
+      time: !book.time,
+      details: !book.name.trim() || !book.phone.trim(),
+      review: book.timeConflict
+    };
+    const nextFnMap = {
+      addons: () => this.goToBookStep("time"),
+      time: () => this.goToBookStep("details"),
+      details: () => this.goToBookStep("review"),
+      review: () => this.attemptConfirm()
+    };
+
+    return {
+      menuOpen: s.menuOpen,
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      jumpNav,
+      isHome: s.route === "home", isServices: s.route === "services",
+      isGallery: s.route === "gallery", isAbout: s.route === "about", isContact: s.route === "contact", isBook: s.route === "book",
+      isPrivacy: s.route === "privacy", isCookies: s.route === "cookies", isTerms: s.route === "terms",
+      goHome: (e) => { if (e) e.preventDefault(); this.goRoute("home"); },
+      goTeam: (e) => { if (e) e.preventDefault(); this.setState({ route: "about", menuOpen: false }); setTimeout(() => this.scrollToId("team-section"), 120); },
+      goServices: (e) => { if (e) e.preventDefault(); this.goRoute("services"); },
+      goGallery: (e) => { if (e) e.preventDefault(); this.goRoute("gallery"); },
+      goContact: (e) => { if (e) e.preventDefault(); this.goRoute("contact"); },
+      goPrivacy: (e) => { if (e) e.preventDefault(); this.goRoute("privacy"); },
+      goCookies: (e) => { if (e) e.preventDefault(); this.goRoute("cookies"); },
+      goTerms: (e) => { if (e) e.preventDefault(); this.goRoute("terms"); },
+      startBookingByService: (e) => { if (e) e.preventDefault(); const b = this.freshBookState(); b.serviceFirst = true; b.step = "service"; this.setState({ route: "book", menuOpen: false, book: b }); window.scrollTo(0, 0); },
+      startBookingAny: (e) => { if (e) e.preventDefault(); const b = this.freshBookState(); b.barberId = "any"; b.step = "service"; this.setState({ route: "book", menuOpen: false, book: b }); window.scrollTo(0, 0); },
+      faqs: this.faqs,
+      statusColor: isOpen ? "var(--status-open)" : "var(--status-closed)",
+      statusLabel,
+      goBook: () => this.startBooking(null),
+      team,
+      groupedServices,
+      priceTeaser: this.priceTeaser.map((p) => ({ name: p.name, price: p.price, duration: p.duration, book: () => this.startBooking(p.bookId) })),
+      reviews: this.reviews,
+      reviewsRef: (el) => { this._reviewsEl = el; },
+      hours: this.hoursData.map((h) => ({ day: h.day, hours: h.label })),
+      toast: s.toast,
+      toastBottom: "calc(78px + env(safe-area-inset-bottom))",
+      contactForm: {
+        name: s.contact.name, message: s.contact.message,
+        setName: (e) => this.setState((st) => ({ contact: { ...st.contact, name: e.target.value } })),
+        setMessage: (e) => this.setState((st) => ({ contact: { ...st.contact, message: e.target.value } })),
+        disabled: !s.contact.name.trim() || !s.contact.message.trim(),
+        submit: () => { this.setState({ contact: { name: "", message: "" } }); this.showToast("Thanks — we'll get back to you."); }
+      },
+      showCookieBanner: !s.cookieChoice,
+      acceptAllCookies: () => this.setCookieChoice("all"),
+      essentialOnlyCookies: () => this.setCookieChoice("essential"),
+      stickyBarEnabled: this.props.stickyBarEnabled ?? true,
+
+      book: {
+        stepTitle: stepTitles[book.step], progress,
+        atBarber: book.step === "barber", atService: book.step === "service", atAddons: book.step === "addons",
+        atTime: book.step === "time", atDetails: book.step === "details", atReview: book.step === "review",
+        atDone: book.step === "done", atDeclined: book.step === "declined",
+        showNav: ["addons", "time", "details", "review"].includes(book.step),
+        back: (e) => {
+          if (e) e.preventDefault();
+          const h = book.history;
+          if (!h.length) { this.goRoute("home"); return; }
+          this.setState((st) => ({ book: { ...st.book, step: h[h.length - 1], history: h.slice(0, -1) } }));
+        },
+        barberChoices, hasAnyOption: !book.filterServiceId || this.eligibleBarbersForService(book.filterServiceId).length > 0, pickAny: () => this.pickBarber("any"),
+        serviceChoices, addonChoices, runningTotal,
+        days, hasSlots: slots.some((sl) => !sl.taken), slots,
+        time: book.time, setTime: (t) => this.setState((st) => ({ book: { ...st.book, time: t } })),
+        name: book.name, phone: book.phone, email: book.email,
+        setName: (e) => this.setState((st) => ({ book: { ...st.book, name: e.target.value } })),
+        setPhone: (e) => this.setState((st) => ({ book: { ...st.book, phone: e.target.value } })),
+        setEmail: (e) => this.setState((st) => ({ book: { ...st.book, email: e.target.value } })),
+        summaryBarber, summaryService, summaryAddons, hasAddonsSummary: book.addOns.length > 0, summaryWhen, summaryTotal,
+        timeConflict: book.timeConflict,
+        altTimes: book.altTimes.map((t) => ({ label: t, pick: () => this.setState((st) => ({ book: { ...st.book, time: t, timeConflict: false, altTimes: [] } })) })),
+        ref: book.ref,
+        nextLabel: nextLabelMap[book.step] || "Continue",
+        nextDisabled: nextDisabledMap[book.step] || false,
+        next: nextFnMap[book.step] || (() => {}),
+        skipAddons: () => this.setState((st) => ({ book: { ...st.book, addOns: [], history: [...st.book.history, "addons"], step: "time" } })),
+        callShop: () => { window.location.href = "tel:+447307453917"; },
+        restart: () => this.setState({ book: this.freshBookState() })
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Copy to .dev.vars (gitignored) for local `wrangler pages dev` testing of
+# functions/api/**. In production these are set as Pages secrets instead:
+#   wrangler pages secret put NAME --project-name=hairhood-website
+
+# --- Square Bookings (sandbox first — see functions/_shared/square.js) ---
+SQUARE_ACCESS_TOKEN=
+SQUARE_LOCATION_ID=
+SQUARE_ENVIRONMENT=sandbox
+
+# --- Sanity (functions/api/contact.js writes "message" docs) ---
+SANITY_PROJECT_ID=ep0gakki
+SANITY_DATASET=production
+SANITY_WRITE_TOKEN=

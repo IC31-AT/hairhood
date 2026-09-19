@@ -1,0 +1,36 @@
+.hh-cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 71;
+  background: #000;
+  border-top: 1px solid var(--hh-brass-500);
+  padding: 16px clamp(20px, 4vw, 56px) calc(16px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+.hh-cookie-banner.hh-cookie-banner-raised {
+  bottom: calc(78px + env(safe-area-inset-bottom));
+}
+.hh-cookie-banner p {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: none;
+}
+.hh-cookie-banner-actions {
+  display: flex;
+  gap: 10px;
+  flex: 0 1 auto;
+  width: 100%;
+}
+@media (min-width: 621px) {
+  .hh-cookie-banner-actions {
+    width: auto;
+  }
+}

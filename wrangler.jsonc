@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hairhood-website",
+  "compatibility_date": "2025-01-01",
+  "pages_build_output_dir": "dist",
+  // Non-secret runtime config for Pages Functions (functions/api/**). Secrets
+  // (Square access token etc.) are NOT set here — see .dev.vars.example and
+  // README "Deploying" section for `wrangler pages secret put`.
+  "vars": {
+    "SQUARE_ENVIRONMENT": "sandbox"
+  }
+}

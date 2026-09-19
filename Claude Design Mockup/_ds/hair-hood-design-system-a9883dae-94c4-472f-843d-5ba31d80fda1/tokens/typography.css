@@ -1,0 +1,63 @@
+:root{
+  /* Franchise = the logo and every title. Bungee = readable UI text, labels, numbers and
+     prices. Richardson Script = mottos and fancy subtext only. Archivo carries running prose
+     (Bungee is unreadable at paragraph length) - see readme.md > Typography. */
+  /* Franchise is a DIMENSIONAL face - the glyphs carry their own drop shadow, so set it
+     large (--fs-700+) with air around it and never at label size. Franchise Filled is the
+     inline/striped cut: one word at a time, signage moments only. */
+  --font-logo:"Franchise",Impact,"Haettenschweiler",sans-serif;
+  --font-display:"Franchise",Impact,"Haettenschweiler",sans-serif;
+  --font-display-inline:"Franchise Filled","Franchise",Impact,sans-serif;
+  --font-ui:"Bungee","Franchise",Impact,sans-serif;
+  --font-script:"Richardson Script","Segoe Script",cursive;
+  --font-body:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+
+  --fs-100:11px;
+  --fs-200:13px;
+  --fs-300:15px;
+  --fs-400:17px;
+  --fs-500:20px;
+  --fs-600:26px;
+  --fs-700:34px;
+  --fs-800:48px;
+  --fs-900:72px;
+  --fs-1000:104px;
+  --fs-1100:148px;
+
+  --lh-tight:0.88; /* @kind other */
+  --lh-snug:1.1; /* @kind other */
+  --lh-normal:1.45; /* @kind other */
+  --lh-loose:1.65; /* @kind other */
+
+  --ls-display:0.01em; /* @kind other */
+  --ls-logo:0.02em; /* @kind other */
+  --ls-eyebrow:0.14em; /* @kind other */
+  --ls-label:0.04em; /* @kind other */
+  --ls-ui:0.02em; /* @kind other */
+  --ls-body:0em; /* @kind other */
+  --ls-script:0.01em; /* @kind other */
+
+  --fw-light:300; /* @kind other */
+  --fw-regular:400; /* @kind other */
+  --fw-medium:500; /* @kind other */
+  --fw-semibold:600; /* @kind other */
+  --fw-bold:700; /* @kind other */
+
+  /* semantic type roles */
+  --type-logo-family:var(--font-logo);
+  --type-hero-family:var(--font-display);
+  --type-hero-size:var(--fs-1000);
+  --type-hero-lh:var(--lh-tight); /* @kind other */
+  --type-heading-family:var(--font-display);
+  --type-eyebrow-family:var(--font-ui);
+  --type-eyebrow-size:var(--fs-100);
+  --type-label-family:var(--font-ui);
+  --type-label-size:var(--fs-200);
+  --type-price-family:var(--font-ui);
+  --type-action-family:var(--font-ui);
+  --type-motto-family:var(--font-script);
+  --type-body-family:var(--font-body);
+  --type-body-size:var(--fs-300);
+  --type-body-lh:var(--lh-normal); /* @kind other */
+}

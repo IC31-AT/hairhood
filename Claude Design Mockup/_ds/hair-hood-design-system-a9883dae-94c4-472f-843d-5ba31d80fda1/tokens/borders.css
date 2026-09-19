@@ -1,0 +1,17 @@
+:root{
+  --radius-0:0px;
+  --radius-1:2px;
+  --radius-2:4px;
+  --radius-3:8px;
+  --radius-pill:999px;
+  --radius-card:var(--radius-0);
+  --radius-control:var(--radius-0);
+  --radius-image:var(--radius-0);
+
+  --border-w-hair:1px;
+  --border-w:1.5px;
+  --border-w-thick:2px;
+  --rule-hairline:1px solid var(--border-hairline);
+  --rule-default:1px solid var(--border-default);
+  --rule-strong:2px solid var(--border-strong);
+}

@@ -1,0 +1,201 @@
+/* ===========================================================================
+   Hair Hood design tokens — ported from the Claude Design Canvas mockup at
+   /Claude Design Mockup/_ds/.../tokens/*.css. Keep this file token-only;
+   component styling lives in component CSS modules.
+   =========================================================================== */
+
+/* ---- fonts --------------------------------------------------------------
+   Bungee (OFL) + Franchise are self-hosted from /public/fonts.
+   Richardson Script is a DEMO / personal-use-only cut — see README "Known
+   issues" before this site ships commercially. Swap or license it first.
+   Archivo (body copy) loads from Google Fonts — no brand body font supplied.
+----------------------------------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+
+@font-face { font-family: "Bungee"; src: url("/fonts/Bungee-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Franchise"; src: url("/fonts/Franchise.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Franchise Filled"; src: url("/fonts/FranchiseFilled.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Richardson Script"; src: url("/fonts/RichardsonScript-DEMO.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+
+:root {
+  /* ---- colour: a monochrome shop. Black is the brand; warm bone keeps it
+     from feeling clinical. Colour appears only as signal, never decoration. */
+  --hh-black: #000000;
+  --hh-ink-900: #0A0A0A;
+  --hh-ink-800: #141414;
+  --hh-ink-700: #1E1E1E;
+  --hh-ink-600: #2B2B2B;
+  --hh-ink-500: #3D3D3D;
+  --hh-ink-400: #5C5C5C;
+  --hh-ink-300: #8A8A8A;
+  --hh-ink-200: #B5B5B5;
+  --hh-ink-100: #D8D8D8;
+  --hh-bone-100: #EDEBE7;
+  --hh-bone-050: #F6F5F2;
+  --hh-marble-050: #F2F1EF;
+  --hh-marble-100: #E4E3E0;
+  --hh-marble-vein: #CFCEC9;
+  --hh-white: #FFFFFF;
+
+  /* jewel accents: art & imagery only, never a UI fill */
+  --hh-jewel-ruby: #A32330;
+  --hh-jewel-sapphire: #1F3A93;
+  --hh-jewel-silver: #C9CCD1;
+
+  /* brass: fine metal — hairlines, thin underlines, small marks on black */
+  --hh-brass-300: #E0C079;
+  --hh-brass-500: #C79A4E;
+  --hh-brass-700: #9A7433;
+  --hh-success-500: #2E7D5B;
+  --hh-warning-500: #E0B341;
+  --hh-danger-500: #B3261E;
+
+  --hh-alpha-white-08: rgba(255,255,255,.08);
+  --hh-alpha-white-16: rgba(255,255,255,.16);
+  --hh-alpha-white-64: rgba(255,255,255,.64);
+  --hh-alpha-black-08: rgba(0,0,0,.08);
+  --hh-alpha-black-12: rgba(0,0,0,.12);
+  --hh-alpha-black-64: rgba(0,0,0,.64);
+
+  /* semantic — light surfaces (default) */
+  --surface-page: var(--hh-bone-050);
+  --surface-card: var(--hh-white);
+  --surface-raised: var(--hh-white);
+  --surface-sunken: var(--hh-bone-100);
+  --surface-marble: var(--hh-marble-050);
+  --surface-inverse: var(--hh-black);
+  --surface-scrim: var(--hh-alpha-black-64);
+
+  --text-strong: var(--hh-black);
+  --text-body: var(--hh-ink-700);
+  --text-muted: var(--hh-ink-400);
+  --text-subtle: var(--hh-ink-300);
+  --text-inverse: var(--hh-white);
+  --text-inverse-muted: var(--hh-alpha-white-64);
+  --text-link: var(--hh-black);
+  --text-link-hover: var(--hh-ink-500);
+
+  --border-hairline: var(--hh-alpha-black-12);
+  --border-metal: var(--hh-brass-500);
+  --border-default: var(--hh-ink-100);
+  --border-strong: var(--hh-black);
+  --border-inverse: var(--hh-alpha-white-16);
+  --rule-metal: 1px solid var(--hh-brass-500);
+
+  --action-primary-bg: var(--hh-black);
+  --action-primary-bg-hover: var(--hh-ink-700);
+  --action-primary-bg-active: var(--hh-ink-800);
+  --action-primary-fg: var(--hh-white);
+  --action-secondary-fg: var(--hh-black);
+  --action-secondary-border: var(--hh-black);
+  --action-secondary-bg-hover: var(--hh-black);
+  --action-secondary-fg-hover: var(--hh-white);
+  --action-ghost-fg: var(--hh-ink-700);
+  --action-ghost-bg-hover: var(--hh-alpha-black-08);
+  --action-disabled-bg: var(--hh-ink-100);
+  --action-disabled-fg: var(--hh-ink-300);
+  --focus-ring: var(--hh-brass-500);
+
+  --status-open: var(--hh-success-500);
+  --status-closing: var(--hh-warning-500);
+  --status-closed: var(--hh-danger-500);
+  --accent-brass: var(--hh-brass-500);
+  --accent-art-ruby: var(--hh-jewel-ruby);
+  --accent-art-sapphire: var(--hh-jewel-sapphire);
+  --accent-art-silver: var(--hh-jewel-silver);
+  --accent-metal: var(--hh-brass-500);
+  --accent-metal-bright: var(--hh-brass-300);
+
+  /* ---- typography ---- */
+  --font-logo: "Franchise", Impact, "Haettenschweiler", sans-serif;
+  --font-display: "Franchise", Impact, "Haettenschweiler", sans-serif;
+  --font-display-inline: "Franchise Filled", "Franchise", Impact, sans-serif;
+  --font-ui: "Bungee", "Franchise", Impact, sans-serif;
+  --font-script: "Richardson Script", "Segoe Script", cursive;
+  --font-body: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --fs-100: 11px; --fs-200: 13px; --fs-300: 15px; --fs-400: 17px; --fs-500: 20px;
+  --fs-600: 26px; --fs-700: 34px; --fs-800: 48px; --fs-900: 72px; --fs-1000: 104px; --fs-1100: 148px;
+
+  --lh-tight: 0.88; --lh-snug: 1.1; --lh-normal: 1.45; --lh-loose: 1.65;
+  --ls-display: 0.01em; --ls-logo: 0.02em; --ls-eyebrow: 0.14em; --ls-label: 0.04em; --ls-ui: 0.02em; --ls-body: 0em; --ls-script: 0.01em;
+  --fw-light: 300; --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+
+  --type-body-family: var(--font-body);
+  --type-body-size: var(--fs-300);
+  --type-body-lh: var(--lh-normal);
+
+  /* ---- spacing ---- */
+  --space-0: 0px; --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
+  --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+  --space-24: 96px; --space-32: 128px; --space-40: 160px;
+
+  --gutter-inline: 24px; --gutter-inline-lg: 56px;
+  --section-y: 96px; --section-y-lg: 128px;
+  --stack-tight: 8px; --stack: 16px; --stack-loose: 32px;
+  --measure-prose: 62ch;
+  --container-max: 1240px; --container-narrow: 760px;
+  --control-h-sm: 36px; --control-h-md: 46px; --control-h-lg: 56px;
+
+  /* ---- borders ---- */
+  --radius-0: 0px; --radius-1: 2px; --radius-2: 4px; --radius-3: 8px; --radius-pill: 999px;
+  --radius-card: var(--radius-0); --radius-control: var(--radius-0); --radius-image: var(--radius-0);
+  --border-w-hair: 1px; --border-w: 1.5px; --border-w-thick: 2px;
+  --rule-hairline: 1px solid var(--border-hairline);
+  --rule-default: 1px solid var(--border-default);
+  --rule-strong: 2px solid var(--border-strong);
+
+  /* ---- elevation ---- */
+  --shadow-0: none;
+  --shadow-1: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-2: 0 8px 24px rgba(0,0,0,.10);
+  --shadow-3: 0 24px 64px rgba(0,0,0,.22);
+  --shadow-inset-hairline: inset 0 -1px 0 var(--border-hairline);
+  --shadow-card: var(--shadow-0);
+  --shadow-overlay: var(--shadow-3);
+  --scrim-image: linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 42%,rgba(0,0,0,.78) 100%);
+  --scrim-bottom: linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.85) 100%);
+  --blur-glass: saturate(140%) blur(14px);
+
+  /* ---- motion ---- */
+  --dur-instant: 80ms; --dur-fast: 140ms; --dur-base: 220ms; --dur-slow: 420ms; --dur-reveal: 700ms;
+  --ease-standard: cubic-bezier(.2,0,.2,1); --ease-out: cubic-bezier(0,0,.2,1); --ease-in: cubic-bezier(.4,0,1,1);
+  --transition-control: background-color var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard), opacity var(--dur-fast) var(--ease-standard);
+  --press-scale: 0.98;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0ms; --dur-base: 0ms; --dur-slow: 0ms; --dur-reveal: 0ms; }
+}
+
+/* Inverse (shopfront) scope — black sections: heroes, footers, booking bar. */
+.hh-inverse {
+  --surface-page: var(--hh-black);
+  --surface-card: var(--hh-ink-900);
+  --surface-raised: var(--hh-ink-800);
+  --surface-sunken: var(--hh-black);
+  --surface-inverse: var(--hh-white);
+  --text-strong: var(--hh-white);
+  --text-body: var(--hh-alpha-white-64);
+  --text-muted: var(--hh-ink-300);
+  --text-subtle: var(--hh-ink-400);
+  --text-inverse: var(--hh-black);
+  --text-link: var(--hh-white);
+  --text-link-hover: var(--hh-ink-200);
+  --border-hairline: var(--hh-alpha-white-16);
+  --border-default: var(--hh-ink-600);
+  --border-strong: var(--hh-white);
+  --action-primary-bg: var(--hh-white);
+  --action-primary-bg-hover: var(--hh-bone-100);
+  --action-primary-bg-active: var(--hh-ink-100);
+  --action-primary-fg: var(--hh-black);
+  --action-secondary-fg: var(--hh-white);
+  --action-secondary-border: var(--hh-white);
+  --action-secondary-bg-hover: var(--hh-white);
+  --action-secondary-fg-hover: var(--hh-black);
+  --action-ghost-fg: var(--hh-white);
+  --action-ghost-bg-hover: var(--hh-alpha-white-08);
+  --action-disabled-bg: var(--hh-ink-700);
+  --action-disabled-fg: var(--hh-ink-400);
+}

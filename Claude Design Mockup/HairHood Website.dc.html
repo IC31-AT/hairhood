@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./image-slot.js"></script>
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/borders.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/motion.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/base.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/styles.css">
+<script src="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#000;overflow-x:hidden}
+@keyframes hh-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes hh-fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+.hh-input input{font-size:16px !important}
+@media (max-width:860px){
+  button, [role="button"]{min-height:44px}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HairSalon","name":"Hair Hood","image":"","telephone":"+447307453917","email":"amir@hairhood.co.uk","address":{"@type":"PostalAddress","streetAddress":"91B Whiteladies Road","addressLocality":"Bristol","postalCode":"BS8 2NT","addressCountry":"GB"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":"Monday","opens":"10:00","closes":"18:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"19:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"17:00"}],"url":""}
+</script>
+<!-- Google Ads / GA4: drop your Measurement ID / Conversion ID below to enable tracking + the booking conversion event.
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
+  window.hhTrackBooking = function(){ gtag('event', 'conversion', {'send_to': 'AW-XXXXXXX/YYYYYYY'}); };
+</script>
+-->
+</helmet>
+
+<div style="background:var(--hh-bone-050);min-height:100dvh">
+
+<header class="hh-inverse" style="position:sticky;top:0;z-index:60;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.14)">
+  <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px);height:72px;display:flex;align-items:center;gap:clamp(16px,3vw,40px)">
+    <a href="#" onClick="{{ goHome }}" style="border:none;font-family:var(--font-logo);font-size:clamp(24px,4vw,32px);line-height:1;letter-spacing:var(--ls-logo);text-transform:uppercase;color:#fff">Hair Hood</a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:clamp(14px,2.2vw,34px);margin-left:auto">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+          <a href="#" onClick="{{ n.go }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.64);padding-bottom:4px;border-bottom:1px solid transparent" style-hover="color:#fff;border-bottom-color:var(--hh-brass-500)">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display:flex;align-items:center;gap:20px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="sm" onClick="{{ goBook }}" hint-size="130px,36px">Book a chair</x-import>
+      </div>
+    </sc-if>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="margin-left:auto;width:44px;height:44px;background:none;border:none;display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer;padding:0">
+        <i style="display:block;height:2px;background:#fff"></i>
+        <i style="display:block;height:2px;background:#fff"></i>
+        <i style="display:block;height:2px;background:#fff"></i>
+      </button>
+    </sc-if>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="hh-inverse" style="position:fixed;inset:0;z-index:80;background:#000;display:flex;flex-direction:column;padding:24px;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));overflow-y:auto;animation:hh-fade .18s cubic-bezier(.2,0,.2,1) both">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:48px">
+      <span style="font-family:var(--font-logo);font-size:28px;letter-spacing:var(--ls-logo);text-transform:uppercase;color:#fff">Hair Hood</span>
+      <button onClick="{{ toggleMenu }}" aria-label="Close" style="width:44px;height:44px;background:none;border:none;color:#fff;font-family:var(--font-ui);font-size:18px;cursor:pointer">×</button>
+    </div>
+    <nav style="margin-top:40px;display:flex;flex-direction:column;gap:4px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a href="#" onClick="{{ n.go }}" style="border:none;border-bottom:1px solid rgba(255,255,255,.14);padding:18px 0;font-family:var(--font-display);font-size:44px;line-height:.9;text-transform:uppercase;color:#fff">{{ n.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:14px">
+      <span style="font-family:var(--font-script);font-size:34px;color:#fff">Welcome to my hood</span>
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" full="{{ true }}" onClick="{{ goBook }}" hint-size="100%,56px">Book a chair</x-import>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ======================= HOME ======================= -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main>
+  <section class="hh-inverse" style="position:relative;background:#000;min-height:min(88dvh,760px);display:flex;align-items:flex-end;overflow:hidden">
+    <img src="uploads/hero.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;filter:grayscale(1) contrast(1.12)">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.28) 40%,rgba(0,0,0,.92) 100%)"></div>
+    <div style="position:relative;width:100%;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px) clamp(48px,7vw,80px)">
+      
+      <h1 style="margin:24px 0 0;font-family:var(--font-display);font-size:clamp(58px,12vw,148px);line-height:.88;letter-spacing:.01em;text-transform:uppercase;color:#fff">Sharp,<br>every time</h1>
+      <div style="font-family:var(--font-script);font-size:clamp(30px,5vw,56px);line-height:1.05;color:#fff;margin-top:14px">Welcome to my hood</div>
+      
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" onClick="{{ goBook }}" hint-size="180px,56px">Book a cut</x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" variant="secondary" onClick="{{ goServices }}" hint-size="170px,56px">Meet the Team</x-import>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section style="background:var(--hh-white);padding:clamp(64px,10vw,128px) 0">
+    <div data-reveal="" style="opacity:0;transform:translateY(16px);max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.SectionHeading" eyebrow="The menu" title="Cuts &amp; prices" motto="same for every chair" lede="Every cut finishes with a hot towel. Prices vary slightly by barber." hint-size="100%,180px"></x-import>
+      <div style="margin-top:40px">
+        <sc-for list="{{ featured }}" as="s" hint-placeholder-count="6">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.ServiceRow" name="{{ s.name }}" duration="{{ s.duration }}" price="{{ s.price }}" on-select="{{ goBook }}" hint-size="100%,72px"></x-import>
+        </sc-for>
+      </div>
+      <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="secondary" onClick="{{ goServices }}" hint-size="180px,46px">Full price list</x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" onClick="{{ goBook }}" hint-size="150px,46px">Book a chair</x-import>
+      </div>
+    </div>
+  </section>
+
+  <section class="hh-inverse" style="background:#000;padding:clamp(64px,10vw,128px) 0">
+    <div data-reveal="" style="opacity:0;transform:translateY(16px);max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.SectionHeading" eyebrow="The work" title="Fresh out the chair" motto="straight from the chair" hint-size="100%,150px"></x-import>
+      <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px">
+        <div style="position:relative;grid-column:span 2;aspect-ratio:1/1;overflow:hidden;background:var(--hh-ink-600)"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:transform .5s cubic-bezier(.2,0,.2,1)" style-hover="transform:scale(1.04)"></div>
+        <div style="position:relative;aspect-ratio:1/1;background:var(--hh-ink-600)"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Skin fade</span></div>
+        <div style="position:relative;aspect-ratio:1/1;background:var(--hh-ink-700)"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Beard work</span></div>
+        <div style="position:relative;aspect-ratio:1/1;background:var(--hh-ink-500)"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Taper</span></div>
+        <div style="position:relative;aspect-ratio:1/1;background:var(--hh-ink-600)"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">The bar</span></div>
+      </div>
+      <div style="margin-top:28px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="secondary" onClick="{{ goGallery }}" hint-size="160px,46px">See the gallery</x-import>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--surface-marble);padding:clamp(64px,10vw,128px) 0">
+    <div data-reveal="" style="opacity:0;transform:translateY(16px);max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.SectionHeading" eyebrow="The chairs" title="Who's cutting" motto="know your barber" lede="Book a name, or leave it to whoever's free." hint-size="100%,170px"></x-import>
+      <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+        <sc-for list="{{ team }}" as="b" hint-placeholder-count="5">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.BarberCard" name="{{ b.name }}" role="{{ b.role }}" signature="{{ b.signature }}" note="{{ b.note }}" photo-label="Photo placeholder" available="{{ b.available }}" on-book="{{ goBook }}" hint-size="100%,420px"></x-import>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--hh-bone-050);padding:clamp(64px,10vw,128px) 0">
+    <div data-reveal="" style="opacity:0;transform:translateY(16px);max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.SectionHeading" eyebrow="What people say" title="From the chair" hint-size="100%,120px"></x-import>
+      <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,4vw,56px)">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="12">
+          <div style="border-top:2px solid var(--hh-black);padding-top:18px">
+            <p style="margin:0;font-family:var(--font-display);font-size:clamp(22px,2.4vw,30px);line-height:1.02;text-transform:uppercase;color:var(--hh-black)">{{ r.quote }}</p>
+            <div style="margin-top:16px;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)">{{ r.who }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--hh-white);padding:clamp(56px,8vw,96px) 0">
+    <div data-reveal="" style="opacity:0;transform:translateY(16px)">
+      <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px">
+        <span class="hh-eyebrow">On Instagram</span>
+        <a href="https://instagram.com" target="_blank" rel="noopener" style="font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase">@hairhood_</a>
+      </div>
+      <!-- Live feed slot: paste your SnapWidget / EmbedSocial / Elfsight Instagram embed snippet here to replace the static tiles below. -->
+      <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:2px">
+        <div style="aspect-ratio:1/1;overflow:hidden"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+        <div style="aspect-ratio:1/1;background:var(--hh-ink-100)"></div>
+        <div style="aspect-ratio:1/1;background:var(--hh-ink-200)"></div>
+        <div style="aspect-ratio:1/1;overflow:hidden"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;object-position:20% 40%;filter:grayscale(1)"></div>
+        <div style="aspect-ratio:1/1;background:var(--hh-ink-100)"></div>
+        <div style="aspect-ratio:1/1;background:var(--hh-bone-100)"></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--hh-bone-050);padding:clamp(64px,10vw,128px) 0">
+    <div data-reveal="" style="opacity:0;transform:translateY(16px);max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
+      <div>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.SectionHeading" eyebrow="Find us" title="91B Whiteladies Road" motto="the door is black" lede="Clifton, Bristol BS8 2NT. Two minutes from the Whiteladies Road bus stops." hint-size="100%,200px"></x-import>
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px;font-size:15px;color:var(--text-body)">
+          <a href="https://maps.google.com/?q=91B+Whiteladies+Road+Bristol+BS8+2NT" target="_blank" rel="noopener" style="font-family:var(--font-ui);font-size:13px;letter-spacing:.02em">Get directions</a>
+        </div>
+        <div style="margin-top:28px;position:relative;aspect-ratio:16/9;filter:grayscale(1) contrast(1.05)">
+          <iframe title="Hair Hood on Google Maps" src="https://www.google.com/maps?q=91B+Whiteladies+Road,+Bristol,+BS8+2NT&amp;output=embed" width="100%" height="100%" style="border:0;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <div style="border-top:2px solid var(--hh-black);padding-top:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+          <span class="hh-eyebrow">Opening hours</span>
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Badge" tone="open" hint-size="110px,28px">Open now</x-import>
+        </div>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.HoursTable" rows="{{ hours }}" today="{{ today }}" style="margin-top:20px" hint-size="100%,320px"></x-import>
+        <p style="margin-top:20px;font-size:13px;color:var(--text-muted)">Last appointment 30 minutes before closing. Walk-ins welcome when a chair is free — booking is safer.</p>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ======================= SERVICES ======================= -->
+<sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+<main>
+  <section class="hh-inverse" style="background:#000;padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,64px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      
+      <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(52px,10vw,120px);line-height:.88;text-transform:uppercase;color:#fff">THE MENU</h1>
+      
+      
+    </div>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:clamp(40px,6vw,64px) 0 clamp(64px,10vw,128px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;padding-bottom:28px;border-bottom:1px solid var(--border-hairline)">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="5">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Tag" selected="{{ c.on }}" onClick="{{ c.pick }}" hint-size="90px,32px">{{ c.label }}</x-import>
+        </sc-for>
+      </div>
+      <div style="margin-top:12px">
+        <sc-for list="{{ groupedServicesAll }}" as="g" hint-placeholder-count="5">
+          <div style="margin-top:36px;border-top:2px solid var(--hh-black);padding-top:14px;--fs-300:12px">
+            <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(28px,5vw,40px);line-height:.9;letter-spacing:.01em;text-transform:uppercase;color:var(--hh-black)">{{ g.label }}</h2>
+            <div style="margin-top:12px">
+              <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="3">
+                <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.ServiceRow" name="{{ s.name }}" duration="{{ s.duration }}" price="{{ s.price }}" on-select="{{ s.book }}" hint-size="100%,64px"></x-import>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,56px)">
+        <div style="border-top:2px solid var(--hh-black);padding-top:16px">
+          <h3>Walk-ins</h3>
+          <p style="margin-top:10px;font-size:15px;color:var(--text-body)">Welcome when a chair is free. Friday and Saturday, book ahead.</p>
+        </div>
+        <div style="border-top:2px solid var(--hh-black);padding-top:16px">
+          <h3>Students</h3>
+          <p style="margin-top:10px;font-size:15px;color:var(--text-body)">Reduced prices on cuts, fades and tapers. Bring your card.</p>
+        </div>
+        <div style="border-top:2px solid var(--hh-black);padding-top:16px">
+          <h3>Paying</h3>
+          <p style="margin-top:10px;font-size:15px;color:var(--text-body)">Card and cash. Booking deposits are taken through Square.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ======================= GALLERY ======================= -->
+<sc-if value="{{ isGallery }}" hint-placeholder-val="{{ false }}">
+<main>
+  <section class="hh-inverse" style="background:#000;padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,64px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <span class="hh-eyebrow" style="color:var(--hh-ink-300)">The work</span>
+      <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(52px,10vw,120px);line-height:.88;text-transform:uppercase;color:#fff">Fresh out<br>the chair</h1>
+      <div style="font-family:var(--font-script);font-size:clamp(26px,4vw,44px);color:#fff;margin-top:10px">straight from the chair</div>
+    </div>
+  </section>
+  <section style="background:#000;padding:0 0 clamp(64px,10vw,128px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));grid-auto-rows:minmax(160px,auto);gap:2px">
+        <div style="grid-column:span 2;grid-row:span 2;overflow:hidden;background:var(--hh-ink-600)"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12);transition:transform .5s cubic-bezier(.2,0,.2,1)" style-hover="transform:scale(1.05)"></div>
+        <div style="position:relative;background:var(--hh-ink-700);min-height:160px"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Skin fade</span></div>
+        <div style="position:relative;background:var(--hh-ink-500);min-height:160px"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Beard, cutthroat</span></div>
+        <div style="position:relative;grid-column:span 2;background:var(--hh-ink-600);min-height:160px"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">The bar at the back</span></div>
+        <div style="position:relative;background:var(--hh-ink-700);min-height:160px"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Taper</span></div>
+        <div style="position:relative;grid-row:span 2;overflow:hidden;background:var(--hh-ink-600);min-height:322px"><img src="uploads/IMG_5572.PNG" alt="" style="width:100%;height:100%;object-fit:cover;object-position:40% 30%;filter:grayscale(1) contrast(1.12);transition:transform .5s cubic-bezier(.2,0,.2,1)" style-hover="transform:scale(1.05)"></div>
+        <div style="position:relative;background:var(--hh-ink-500);min-height:160px"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Scissor cut</span></div>
+        <div style="position:relative;background:var(--hh-ink-700);min-height:160px"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Hot towel</span></div>
+        <div style="position:relative;grid-column:span 2;background:var(--hh-ink-600);min-height:160px">
+          <span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">The art wall — studded antlers</span>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:6px;display:grid;grid-template-columns:repeat(3,1fr)"><i style="background:var(--hh-jewel-ruby)"></i><i style="background:var(--hh-jewel-silver)"></i><i style="background:var(--hh-jewel-sapphire)"></i></div>
+        </div>
+        <div style="position:relative;background:var(--hh-ink-500);min-height:160px"><span style="position:absolute;top:12px;left:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">Kids cut</span></div>
+      </div>
+      <p style="margin-top:24px;font-size:13px;color:var(--hh-ink-300)">Grey tiles are placeholders — send us the shoot and they drop straight in.</p>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ======================= TEAM ======================= -->
+<sc-if value="{{ isTeam }}" hint-placeholder-val="{{ false }}">
+<main>
+  <section class="hh-inverse" style="background:#000;padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,64px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      
+      <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(52px,10vw,120px);line-height:.88;text-transform:uppercase;color:#fff">Meet the team</h1>
+      
+      
+    </div>
+  </section>
+  <section style="background:var(--surface-marble);padding:clamp(48px,7vw,80px) 0 clamp(64px,10vw,128px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+        <sc-for list="{{ team }}" as="b" hint-placeholder-count="5">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.BarberCard" name="{{ b.name }}" role="{{ b.role }}" signature="{{ b.signature }}" note="{{ b.note }}" photo-label="Photo placeholder" available="{{ b.available }}" on-book="{{ b.book }}" hint-size="100%,440px"></x-import>
+        </sc-for>
+      </div>
+      <div style="margin-top:clamp(48px,7vw,80px);border-top:2px solid var(--hh-black);padding-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,56px);align-items:start">
+        <div>
+          <span class="hh-eyebrow">Careers</span>
+          <h2 style="margin-top:12px;font-size:clamp(30px,4vw,48px)">Chair going spare</h2>
+          <p style="margin-top:14px;font-size:15px;color:var(--text-body)">We take on barbers who can hold a standard and a conversation. Send your work and we'll get you in for a trade test.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" onClick="{{ noop }}" hint-size="180px,46px">Email your work</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ======================= ABOUT ======================= -->
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<main>
+  <section class="hh-inverse" style="position:relative;background:#000;min-height:min(62dvh,520px);display:flex;align-items:flex-end;overflow:hidden">
+    <img src="uploads/hero landscape.JPG" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 28%;filter:grayscale(1) contrast(1.1)">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.92))"></div>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px) clamp(40px,6vw,64px);width:100%">
+      
+      <h1 style="margin:16px 0 0;font-family:var(--font-display);font-size:clamp(52px,10vw,120px);line-height:.88;text-transform:uppercase;color:#fff">ABOUT US</h1>
+    </div>
+  </section>
+  <section style="background:var(--hh-bone-050);padding:clamp(56px,9vw,112px) 0 0">
+    <div style="max-width:760px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="border-top:2px solid var(--hh-black);padding-top:24px;margin-bottom:clamp(48px,7vw,80px)">
+        <span class="hh-eyebrow">A word from Amir</span>
+        <p style="margin-top:20px;font-size:16px;line-height:1.7;color:var(--text-body);max-width:none">Hi, and welcome to my hood.</p>
+        <p style="margin-top:14px;font-size:16px;line-height:1.7;color:var(--text-body);max-width:none">My name is Amir, and I'm the director of Hair Hood.</p>
+        <p style="margin-top:14px;font-size:16px;line-height:1.7;color:var(--text-body);max-width:none">I've been providing my barbering skills for over a decade.</p>
+        <p style="margin-top:14px;font-size:16px;line-height:1.7;color:var(--text-body);max-width:none">My top priority is giving a quality, high end service whilst allowing my clients to feel comfortable and relaxed with their complimentary drink in hand.</p>
+        <p style="margin-top:14px;font-size:16px;line-height:1.7;color:var(--text-body);max-width:none">I hope we meet soon!</p>
+        <p style="margin-top:20px;font-family:var(--font-script);font-size:clamp(26px,4vw,36px);color:var(--hh-black)">— Amir Baghery</p>
+      </div>
+      <div style="margin-bottom:clamp(48px,7vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2px">
+        <div style="grid-column:span 2;overflow:hidden;aspect-ratio:16/10"><img src="uploads/bar.JPG" alt="Amir cutting a client's hair" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12)"></div>
+        <div style="overflow:hidden;aspect-ratio:3/4"><img src="uploads/heo portrait.JPG" alt="Amir cutting a client's hair, street view" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.12)"></div>
+        <div style="overflow:hidden;aspect-ratio:3/4"><img src="uploads/supplement shot.JPG" alt="Close-up of a fade being finished" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12)"></div>
+        <div style="grid-column:span 2;overflow:hidden;aspect-ratio:16/9"><img src="uploads/IMG_5572.PNG" alt="The art wall behind the bar" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(1) contrast(1.12)"></div>
+      </div>
+      <p style="font-size:clamp(18px,2.4vw,24px);line-height:1.4;color:var(--hh-black);max-width:none">A haircut is measurement, angle and pressure. Get those right and it grows out well for six weeks. Get them wrong and no amount of product saves it.</p>
+      <p style="margin-top:24px;font-size:16px;line-height:1.6;color:var(--text-body);max-width:none">That is the whole idea behind Hair Hood. We book longer than most shops on Whiteladies Road because a skin fade taken properly to the skin needs fifty minutes, not twenty-five. We check the shape twice — once wet, once dry — before anything is finished.</p>
+      <p style="margin-top:20px;font-size:16px;line-height:1.6;color:var(--text-body);max-width:none">The room is part of it too. There is a bar at the back, monochrome prints on the wall, and a set of jewel-studded antlers nobody expects. Take a drink while you wait. Ask about any of it.</p>
+      <div style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px">
+        
+        
+        
+      </div>
+      <div style="margin-top:48px;font-family:var(--font-script);font-size:clamp(30px,5vw,52px);line-height:1.05;color:var(--hh-black)">Welcome to my hood</div>
+      <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" onClick="{{ goBook }}" hint-size="180px,56px">Book a chair</x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" variant="secondary" onClick="{{ goTeam }}" hint-size="170px,56px">Meet the team</x-import>
+      </div>
+      
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<!-- ======================= BOOK ======================= -->
+<sc-if value="{{ isBook }}" hint-placeholder-val="{{ false }}">
+<main style="background:var(--hh-bone-050);min-height:70dvh;padding:clamp(32px,5vw,64px) 0 clamp(64px,9vw,112px)">
+  <div style="max-width:760px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <span class="hh-eyebrow">Book a chair</span>
+    <h1 style="margin:12px 0 0;font-size:clamp(40px,7vw,72px)">{{ stepTitle }}</h1>
+    <div style="margin-top:24px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="5">
+        <div style="padding-top:10px">
+          <i style="display:block;height:3px;background:var(--hh-ink-100)"></i>
+          <span style="display:block;margin-top:8px;font-family:var(--font-ui);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-subtle)">{{ st.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:8px;height:3px;background:var(--hh-black);width:{{ progress }};transition:width .22s cubic-bezier(.2,0,.2,1)"></div>
+
+    <sc-if value="{{ atService }}" hint-placeholder-val="{{ true }}">
+      <div style="margin-top:32px">
+        <sc-for list="{{ groupedServices }}" as="g" hint-placeholder-count="5">
+          <div style="margin-top:36px;border-top:2px solid var(--hh-black);padding-top:14px;--fs-300:12px">
+            <h2 style="margin:0;font-family:var(--font-display);font-size:clamp(28px,5vw,40px);line-height:.9;letter-spacing:.01em;text-transform:uppercase;color:var(--hh-black)">{{ g.label }}</h2>
+            <div style="margin-top:12px">
+              <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="3">
+                <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.ServiceRow" name="{{ s.name }}" duration="{{ s.duration }}" price="{{ s.price }}" selected="{{ s.on }}" on-select="{{ s.choose }}" hint-size="100%,64px"></x-import>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ atBarber }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px">
+        <sc-for list="{{ barberPicks }}" as="b" hint-placeholder-count="6">
+          <div onClick="{{ b.pick }}" style="cursor:pointer;border:2px solid {{ b.borderColor }};padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px">
+            <sc-if value="{{ b.showPhoto }}" hint-placeholder-val="{{ true }}">
+              <image-slot id="{{ b.photoId }}" shape="circle" style="width:64px;height:64px" placeholder="Photo"></image-slot>
+            </sc-if>
+            <sc-if value="{{ b.showPhoto }}" hint-placeholder-val="{{ true }}" invert="{{ true }}">
+              <div style="width:64px;height:64px;border-radius:50%;background:var(--hh-bone-050);display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:11px;color:var(--text-muted)">Any</div>
+            </sc-if>
+            <span style="font-family:var(--font-ui);font-size:13px;letter-spacing:.02em">{{ b.name }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin-top:20px;font-size:14px;color:var(--text-muted)">Amir runs slightly shorter appointments; the price shown on your service updates to match.</p>
+    </sc-if>
+
+    <sc-if value="{{ atTime }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:32px">
+        <span class="hh-eyebrow">Pick a day</span>
+        <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ days }}" as="d" hint-placeholder-count="7">
+            <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Tag" selected="{{ d.on }}" onClick="{{ d.pick }}" hint-size="90px,32px">{{ d.label }}</x-import>
+          </sc-for>
+        </div>
+        <div style="margin-top:32px;border-top:2px solid var(--hh-black);padding-top:20px">
+          <span class="hh-eyebrow">Pick a time</span>
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.TimeSlotGrid" slots="{{ slots }}" value="{{ time }}" on-change="{{ setTime }}" columns="{{ slotCols }}" style="margin-top:16px" hint-size="100%,160px"></x-import>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ atDetails }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Input" class-name="hh-input" label="Name" placeholder="Your name" value="{{ name }}" onChange="{{ setName }}" hint-size="100%,80px"></x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Input" class-name="hh-input" label="Mobile" type="tel" input-mode="tel" placeholder="07…" hint="We text you the day before." value="{{ phone }}" onChange="{{ setPhone }}" hint-size="100%,80px"></x-import>
+      </div>
+      <div style="margin-top:32px;border-top:2px solid var(--hh-black);padding-top:20px;display:flex;flex-direction:column;gap:10px">
+        <span class="hh-eyebrow">Your booking</span>
+        <div style="font-family:var(--font-ui);font-size:15px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">{{ summary }}</div>
+        <span style="font-size:13px;color:var(--text-muted)">Payment is taken in the shop. Confirmation runs through Square.</span>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ atDone }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:40px;border-top:2px solid var(--hh-black);padding-top:24px">
+        <div style="font-family:var(--font-script);font-size:clamp(32px,6vw,56px);line-height:1.05;color:var(--hh-black)">Welcome to my hood</div>
+        <div style="margin-top:20px;font-family:var(--font-ui);font-size:16px;letter-spacing:.02em;text-transform:uppercase;color:var(--hh-black)">{{ summary }}</div>
+        <p style="margin-top:16px;font-size:15px;color:var(--text-body)">We'll text you the day before. 91B Whiteladies Road — the door is black.</p>
+        <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px">
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" onClick="{{ goHome }}" hint-size="150px,46px">Back to the shop</x-import>
+          <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" variant="secondary" onClick="{{ restart }}" hint-size="160px,46px">Book another</x-import>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+      <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" disabled="{{ nextDisabled }}" onClick="{{ next }}" hint-size="150px,56px">{{ nextLabel }}</x-import>
+        <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" size="lg" variant="ghost" onClick="{{ back }}" hint-size="90px,56px">Back</x-import>
+      </div>
+    </sc-if>
+  </div>
+</main>
+</sc-if>
+
+<footer class="hh-inverse" style="background:#000;color:#fff;padding:clamp(56px,8vw,80px) 0 32px">
+  <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(32px,5vw,64px)">
+      <div>
+        <div style="font-family:var(--font-logo);font-size:30px;text-transform:uppercase;letter-spacing:var(--ls-logo);line-height:.9">Hair Hood</div>
+        <div style="font-family:var(--font-script);font-size:30px;line-height:1.1;color:#fff;margin-top:8px">Welcome to my hood</div>
+        <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.64);max-width:38ch">Barbering, a bar and a wall worth looking at. Whiteladies Road, Clifton.</p>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <span class="hh-eyebrow" style="color:var(--hh-ink-300);margin-bottom:6px">Shop</span>
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+          <a href="#" onClick="{{ n.go }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.64);padding:11px 0" style-hover="color:#fff">{{ n.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span class="hh-eyebrow" style="color:var(--hh-ink-300)">Find us</span>
+        <span style="font-size:14px;color:rgba(255,255,255,.64);line-height:1.5">91B Whiteladies Road<br>Clifton, Bristol<br>BS8 2NT</span>
+        <a href="tel:+447307453917" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.64);padding:8px 0" style-hover="color:#fff">07307 453917</a>
+        <a href="mailto:amir@hairhood.co.uk" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.64);padding:8px 0" style-hover="color:#fff">amir@hairhood.co.uk</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span class="hh-eyebrow" style="color:var(--hh-ink-300)">Hours</span>
+        <span style="font-family:var(--font-ui);font-size:11px;letter-spacing:.02em;color:rgba(255,255,255,.64);line-height:2">Mon 10:00–18:00<br>Tue–Fri 09:00–19:00<br>Sat 09:00–17:00<br>Sun Closed</span>
+      </div>
+    </div>
+    <div style="margin-top:clamp(40px,6vw,64px);padding-top:24px;border-top:1px solid var(--hh-brass-500);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-400)">
+      <span>© Hair Hood LTD</span><span>Bristol, UK</span>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ showBookBar }}" hint-placeholder-val="{{ false }}">
+  <div class="hh-inverse" style="position:fixed;left:0;right:0;bottom:0;z-index:70;background:#000;border-top:1px solid var(--hh-brass-500);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px">
+    <x-import component-from-global-scope="HairHoodDesignSystem_a9883d.Button" full="{{ true }}" onClick="{{ goBook }}" hint-size="100%,46px">Book a cut</x-import>
+  </div>
+  <div style="height:calc(70px + env(safe-area-inset-bottom));background:#000"></div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1240}}">
+class Component extends DCLogic {
+  state = {
+    route: "home", menuOpen: false, narrow: false,
+    cat: "all", step: 1,
+    service: null, barber: "Any barber", day: 0, time: null, name: "", phone: ""
+  };
+
+  services = [
+    { name: "Haircut", cat: "cuts", duration: "20–30 min", price: "£22", variants: "Alex / Arthur / Hamid / Saahil · 30 min · £22  —  Amir · 20 min · £24" },
+    { name: "Skin fade", cat: "cuts", duration: "40–50 min", price: "£27", variants: "Alex / Arthur / Hamid / Saahil · 50 min · £27  —  Amir · 40 min · £29" },
+    { name: "Taper fade", cat: "cuts", duration: "30–40 min", price: "£24", variants: "Alex / Arthur / Hamid / Saahil · 40 min · £24  —  Amir · 30 min · £26" },
+    { name: "Scissor cut", cat: "cuts", duration: "25–35 min", price: "£23", variants: "Alex / Arthur / Hamid / Saahil · 35 min · £23  —  Amir · 25 min · £25" },
+    { name: "Crew cut", cat: "cuts", duration: "15–25 min", price: "£15", variants: "Alex / Arthur / Hamid / Saahil · 25 min  —  Amir · 15 min" },
+    { name: "Long hair", cat: "cuts", duration: "45–55 min", price: "£29", variants: "Alex / Arthur / Hamid / Saahil · 55 min  —  Amir · 45 min" },
+    { name: "Haircut & beard trim", cat: "beards", duration: "35–45 min", price: "£30", variants: "Alex / Arthur / Hamid / Saahil · 45 min · £30  —  Amir · 35 min · £33" },
+    { name: "Skin fade & beard trim", cat: "beards", duration: "50–60 min", price: "£35", variants: "Alex / Arthur / Hamid / Saahil · 1 hr · £35  —  Amir · 50 min · £38" },
+    { name: "Taper fade & beard trim, cutthroat", cat: "beards", duration: "45 min", price: "£32", variants: "Alex / Arthur / Hamid / Saahil · £32  —  Amir · £34" },
+    { name: "Crew cut & beard trim", cat: "beards", duration: "25–35 min", price: "£25", variants: "Alex / Arthur / Hamid / Saahil · 35 min  —  Amir · 25 min" },
+    { name: "Beard trim", cat: "beards", duration: "15–25 min", price: "£15", variants: "Alex / Arthur / Hamid / Saahil · 25 min  —  Amir · 15 min" },
+    { name: "Haircut & hot towel shave", cat: "shaves", duration: "45–55 min", price: "£35", variants: "Or beard trim with a cutthroat razor. Amir · 45 min  —  others · 55 min" },
+    { name: "Skin fade & hot towel shave", cat: "shaves", duration: "1 hr – 1 hr 15", price: "£40", variants: "Or beard trim with a cutthroat razor. Amir · 1 hr  —  others · 1 hr 15" },
+    { name: "Taper fade & hot towel shave", cat: "shaves", duration: "50 min", price: "£37", variants: "Or beard trim with a cutthroat razor." },
+    { name: "Hot towel face shave", cat: "shaves", duration: "40 min", price: "£25", variants: "Traditional wet shave, twice over." },
+    { name: "Hot towel head shave", cat: "shaves", duration: "40 min", price: "£25", variants: "Taken down to the skin and finished hot." },
+    { name: "Hot towel head & face shave", cat: "shaves", duration: "1 hr 20 min", price: "£45", variants: "The full thing, unhurried." },
+    { name: "Full facial, hot towel & mask", cat: "extras", duration: "20–30 min", price: "£20", variants: "Alex / Arthur / Hamid / Saahil · 30 min  —  Amir · 20 min" },
+    { name: "Student haircut", cat: "students", duration: "20–30 min", price: "£20", variants: "Alex / Arthur / Hamid / Saahil · 30 min · £20  —  Amir · 20 min · £22" },
+    { name: "Student skin fade", cat: "students", duration: "40–50 min", price: "£25", variants: "Alex / Arthur / Hamid / Saahil · 50 min · £25  —  Amir · 40 min · £27" },
+    { name: "Student taper fade", cat: "students", duration: "30–40 min", price: "£22", variants: "Alex / Arthur / Hamid / Saahil · 40 min · £22  —  Amir · 30 min · £24" }
+  ];
+
+  team = [
+    { name: "Amir", role: "Owner", signature: "Amir", note: "Skin fades and cutthroat work. Runs the shop and the bar behind it.", available: "Today 15:30" },
+    { name: "Alex", role: "", signature: "Alex", note: "Scissor work, longer hair, textured crops.", available: "Today 16:15" },
+    { name: "Arthur", role: "", signature: "Arthur", note: "Classic cuts, tapers and beard shaping.", available: "Today 17:00" },
+    { name: "Hamid", role: "", signature: "Hamid", note: "Fades taken clean to the skin. Fast, never rushed.", available: "Tomorrow 09:30" },
+    { name: "Saahil", role: "", signature: "Saahil", note: "Crops, tapers and hot towel shaves.", available: "Tomorrow 10:00" }
+  ];
+
+  hours = [
+    { day: "Monday", hours: "10:00 – 18:00" }, { day: "Tuesday", hours: "09:00 – 19:00" },
+    { day: "Wednesday", hours: "09:00 – 19:00" }, { day: "Thursday", hours: "09:00 – 19:00" },
+    { day: "Friday", hours: "09:00 – 19:00" }, { day: "Saturday", hours: "09:00 – 17:00" },
+    { day: "Sunday" }
+  ];
+
+  reviews = [
+    { quote: "“Amir gives a clean fade, sharp finish, no fuss.”", who: "Adam T." },
+    { quote: "“Best mens barbershop in Bristol. Book in advance.”", who: "Danny J." },
+    { quote: "“He listens carefully and delivers exactly what's asked.”", who: "Mohammadhadi S." },
+    { quote: "“Doesn't just cut and send you out — real styling advice too.”", who: "Alexandros F." },
+    { quote: "“Clean lines, natural layers. Shows how skilled he is.”", who: "Edouard B." },
+    { quote: "“Offers a drink as soon as you walk in. Top barber.”", who: "Samuel" },
+    { quote: "“Probably the best barber in Bristol.”", who: "Ishaan C." },
+    { quote: "“Consistent, sharp finish. First choice for a haircut.”", who: "Joe D." },
+    { quote: "“Set me up for a wedding in Madrid. Will be returning.”", who: "Joe H." },
+    { quote: "“Attention to detail and friendly service are the best I've found.”", who: "Jeryl W." },
+    { quote: "“Took his time, checked in throughout. A genuine great person.”", who: "Shak K." },
+    { quote: "“Very good fade — took one look and made it better than the photo.”", who: "Micah X." }
+  ];
+
+  catList = [["all", "Everything"], ["cuts", "Cuts"], ["beards", "Beards"], ["shaves", "Shaves"], ["students", "Students"], ["extras", "Extras"]];
+  slotTimes = ["09:00", "09:45", "10:30", "11:15", "12:00", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00"];
+  stepLabels = ["Service", "Barber", "Time", "Details", "Done"];
+
+  componentDidMount() {
+    this.mq = window.matchMedia("(max-width: 860px)");
+    this.onMq = () => this.setState({ narrow: this.mq.matches });
+    this.onMq();
+    this.mq.addEventListener("change", this.onMq);
+    this.observeReveals();
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener("change", this.onMq);
+    if (this.io) this.io.disconnect();
+  }
+  componentDidUpdate(pp, ps) {
+    if (ps.route !== this.state.route) {
+      window.scrollTo(0, 0);
+      setTimeout(() => this.observeReveals(), 30);
+    }
+  }
+  observeReveals() {
+    if (this.io) this.io.disconnect();
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.transition = "opacity .7s cubic-bezier(.2,0,.2,1), transform .7s cubic-bezier(.2,0,.2,1)";
+          e.target.style.opacity = "1";
+          e.target.style.transform = "none";
+          this.io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll("[data-reveal]").forEach((el) => this.io.observe(el));
+  }
+
+  go(route) { this.setState({ route, menuOpen: false }); }
+
+  renderVals() {
+    const s = this.state;
+    const nav = [["Home", "home"], ["Services", "services"], ["Gallery", "gallery"], ["Team", "team"], ["About", "about"]]
+      .map(([label, r]) => ({ label, go: (e) => { if (e) e.preventDefault(); this.go(r); } }));
+
+    const filtered = s.cat === "all" ? this.services : this.services.filter((x) => x.cat === s.cat);
+    const shown = filtered.map((x) => Object.assign({}, x, {
+      on: s.service === x.name,
+      book: () => this.setState({ route: "book", step: 1, service: x.name }),
+      choose: () => this.setState({ service: x.name })
+    }));
+
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const base = new Date();
+    const days = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(base.getTime() + i * 86400000);
+      const label = i === 0 ? "Today" : i === 1 ? "Tomorrow" : dayNames[d.getDay()].slice(0, 3) + " " + d.getDate();
+      days.push({ label, full: dayNames[d.getDay()] + " " + d.getDate(), on: s.day === i, pick: () => this.setState({ day: i, time: null }) });
+    }
+    const closed = dayNames[new Date(base.getTime() + s.day * 86400000).getDay()] === "Sunday";
+    const slots = closed ? [] : this.slotTimes.map((t, i) => ({ time: t, taken: (i + s.day) % 4 === 0 }));
+
+    const barberPicks = [{ name: "Any barber" }].concat(this.team).map((b) => ({
+      name: b.name, on: s.barber === b.name, pick: () => this.setState({ barber: b.name }),
+      showPhoto: b.name !== "Any barber", photoId: "booking-barber-" + b.name.toLowerCase(),
+      borderColor: s.barber === b.name ? "var(--hh-black)" : "transparent"
+    }));
+
+    const catLabels = { cuts: "Cuts", beards: "Beards", shaves: "Hot towel shaves", students: "Students", extras: "Extras" };
+    const groupedServices = ["cuts", "beards", "shaves", "students", "extras"].map((c) => ({
+      label: catLabels[c],
+      items: this.services.filter((x) => x.cat === c).map((x) => ({
+        name: x.name, duration: x.duration, price: x.price,
+        on: s.service === x.name, choose: () => this.setState({ service: x.name, step: 2 })
+      }))
+    }));
+
+    const groupedServicesAll = (s.cat === "all" ? ["cuts", "beards", "shaves", "students", "extras"] : [s.cat]).map((c) => ({
+      label: catLabels[c],
+      items: this.services.filter((x) => x.cat === c).map((x) => ({
+        name: x.name, duration: x.duration, price: x.price,
+        book: () => this.setState({ route: "book", step: 1, service: x.name })
+      }))
+    }));
+
+    const svc = this.services.find((x) => x.name === s.service);
+    const summary = [svc ? svc.name : "—", s.barber === "Any barber" ? "first free chair" : "with " + s.barber,
+      (days[s.day] ? days[s.day].full : ""), s.time || ""].filter(Boolean).join(" · ");
+
+    const nextDisabled = (s.step === 1 && !s.service) || (s.step === 2 && !s.barber) ||
+      (s.step === 3 && !s.time) || (s.step === 4 && (!s.name.trim() || !s.phone.trim()));
+
+    return {
+      nav,
+      isHome: s.route === "home", isServices: s.route === "services", isGallery: s.route === "gallery",
+      isTeam: s.route === "team", isAbout: s.route === "about", isBook: s.route === "book",
+      narrow: s.narrow, wide: !s.narrow, menuOpen: s.menuOpen,
+      showBookBar: s.narrow && s.route !== "book",
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      goHome: (e) => { if (e) e.preventDefault(); this.go("home"); },
+      goServices: () => this.go("services"),
+      goGallery: () => this.go("gallery"),
+      goTeam: () => this.go("team"),
+      goBook: () => this.setState({ route: "book", menuOpen: false }),
+      noop: () => { window.location.href = "mailto:amir@hairhood.co.uk?subject=Chair%20going%20spare"; },
+
+      featured: this.services.filter((x) => ["Haircut", "Skin fade", "Taper fade", "Haircut & beard trim", "Hot towel face shave", "Student haircut"].indexOf(x.name) > -1)
+        .map((x) => Object.assign({}, x)),
+      team: this.team.map((b) => Object.assign({}, b, { book: () => this.setState({ route: "book", barber: b.name, step: 1 }) })),
+      hours: this.hours, today: dayNames[base.getDay()], reviews: this.reviews,
+      cats: this.catList.map(([v, label]) => ({ label, on: s.cat === v, pick: () => this.setState({ cat: v }) })),
+      shown, groupedServices, groupedServicesAll,
+
+      steps: this.stepLabels.map((label) => ({ label })),
+      progress: (s.step / 5) * 100 + "%",
+      stepTitle: ["Pick a service", "Pick a barber", "Pick a time", "Your details", "You're in."][s.step - 1],
+      atService: s.step === 1, atBarber: s.step === 2, atTime: s.step === 3, atDetails: s.step === 4, atDone: s.step === 5,
+      showNav: s.step < 5,
+      barberPicks, days, slots, slotCols: s.narrow ? 3 : 6,
+      time: s.time, setTime: (t) => this.setState({ time: t }),
+      name: s.name, phone: s.phone,
+      setName: (e) => this.setState({ name: e.target.value }),
+      setPhone: (e) => this.setState({ phone: e.target.value }),
+      summary, nextDisabled,
+      nextLabel: ["Pick a barber", "Pick a time", "Your details", "Confirm booking"][s.step - 1],
+      next: () => this.setState({ step: Math.min(5, s.step + 1) }),
+      back: () => { if (s.step === 1) this.go("home"); else this.setState({ step: s.step - 1 }); },
+      restart: () => this.setState({ step: 1, service: null, barber: "Any barber", time: null, name: "", phone: "" })
+    };
+  }
+}
+</script>
+</body>
+</html>

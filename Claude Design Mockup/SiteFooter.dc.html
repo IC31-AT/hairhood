@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/borders.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/tokens/base.css">
+<link rel="stylesheet" href="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/styles.css">
+<script src="_ds/hair-hood-design-system-a9883dae-94c4-472f-843d-5ba31d80fda1/_ds_bundle.js"></script>
+<style>a{color:#fff}a:hover{color:var(--hh-brass-500)}</style>
+</helmet>
+<footer class="hh-inverse" style="background:#000;padding:40px 20px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:28px;box-sizing:border-box">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font-family:var(--font-logo);font-size:26px;text-transform:uppercase;letter-spacing:var(--ls-logo);color:#fff">Hair Hood</div>
+    <div style="display:flex;gap:18px">
+      <a href="https://instagram.com" target="_blank" rel="noopener" style="border:none;font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#fff">Instagram</a>
+      <a href="https://wa.me/447307453917" target="_blank" rel="noopener" style="border:none;font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#fff">WhatsApp</a>
+    </div>
+    <a href="tel:+447307453917" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;color:#fff">07307 453917</a>
+    <div style="font-size:13px;line-height:1.5;color:rgba(255,255,255,.7)">91B Whiteladies Road<br>Clifton, Bristol BS8 2NT</div>
+    <div style="font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300)">{{ hoursToday }}</div>
+    <a href="#" onClick="{{ onContact }}" style="border:none;font-family:var(--font-ui);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hh-ink-300);text-decoration:underline;margin-top:6px">Contact &amp; FAQ</a>
+  </div>
+
+  <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:24px;display:flex;flex-direction:column;gap:12px">
+    <div style="font-family:var(--font-ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--hh-ink-300)">Booking</div>
+    <a href="#" onClick="{{ onBookService }}" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:#fff">Book by service</a>
+    <a href="#" onClick="{{ onBookBarber }}" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:#fff">Book by barber</a>
+    <a href="#" onClick="{{ onBookAny }}" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:#fff">Book any barber</a>
+  </div>
+
+  <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:24px;display:flex;flex-direction:column;gap:12px">
+    <div style="font-family:var(--font-ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--hh-ink-300)">Site</div>
+    <a href="#" onClick="{{ onHome }}" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:#fff">Home</a>
+    <a href="#" onClick="{{ onTeam }}" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:#fff">Meet the Team</a>
+    <a href="#" onClick="{{ onGallery }}" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:#fff">Gallery &amp; Reviews</a>
+    <a href="#" onClick="{{ onPrices }}" style="border:none;font-family:var(--font-ui);font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:#fff">Prices</a>
+  </div>
+
+  <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:20px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-family:var(--font-ui);font-size:10px;letter-spacing:.04em;text-transform:uppercase">
+    <a href="#" onClick="{{ onPrivacy }}" style="border:none;color:var(--hh-ink-300)">Privacy Policy</a>
+    <span style="color:var(--hh-ink-700)">·</span>
+    <a href="#" onClick="{{ onCookies }}" style="border:none;color:var(--hh-ink-300)">Cookie Policy</a>
+    <span style="color:var(--hh-ink-700)">·</span>
+    <a href="#" onClick="{{ onTerms }}" style="border:none;color:var(--hh-ink-300)">Booking Terms</a>
+    <span style="color:var(--hh-ink-700)">·</span>
+    <span style="color:var(--hh-ink-300)">© 2026 Hair Hood</span>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:375,&quot;height&quot;:600},&quot;hoursToday&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open now · closes 19:00&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onHome&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onTeam&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onGallery&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onPrices&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onContact&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onBookService&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onBookBarber&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onBookAny&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onPrivacy&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onCookies&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onTerms&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;}}"></script>
+</body>
+</html>

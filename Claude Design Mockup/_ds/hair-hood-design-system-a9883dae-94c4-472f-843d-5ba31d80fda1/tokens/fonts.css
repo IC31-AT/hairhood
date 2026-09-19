@@ -1,0 +1,8 @@
+/* Hair Hood webfonts. Bungee (OFL) + Franchise are self-hosted from assets/fonts.
+   Richardson Script is a DEMO/personal-use file - see assets/fonts/RichardsonScript-LICENSE.txt.
+   Archivo is loaded from Google Fonts as the UI/body substitute (no brand body font supplied). */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+@font-face{font-family:"Bungee";src:url("../assets/fonts/Bungee-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Franchise";src:url("../assets/fonts/Franchise.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Franchise Filled";src:url("../assets/fonts/FranchiseFilled.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Richardson Script";src:url("../assets/fonts/RichardsonScript-DEMO.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap}

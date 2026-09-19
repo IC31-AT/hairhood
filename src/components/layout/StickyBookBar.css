@@ -1,0 +1,10 @@
+.hh-sticky-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  background: #000;
+  border-top: 1px solid var(--hh-brass-500);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+}
