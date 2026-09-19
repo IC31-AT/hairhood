@@ -73,25 +73,11 @@ export const BARBERS = [
     note: "Scissor work, longer hair, textured crops.",
   },
   {
-    id: "arthur",
-    name: "Arthur",
-    role: "Barber",
-    signature: "Arthur",
-    note: "Classic cuts, tapers and beard shaping.",
-  },
-  {
     id: "hamid",
     name: "Hamid",
     role: "Junior Barber",
     signature: "Hamid",
     note: "Fades taken clean to the skin. Fast, never rushed.",
-  },
-  {
-    id: "saahil",
-    name: "Saahil",
-    role: "Apprentice Barber",
-    signature: "Saahil",
-    note: "Crops, tapers and hot towel shaves.",
   },
 ];
 
@@ -112,14 +98,12 @@ export const BASE_SERVICES = [
 export const BARBER_PRICING = {
   amir: { haircut: [24, 20], skinfade: [29, 40], taper: [26, 30], scissor: [25, 25], beard: [15, 15], hottowel: [25, 40] },
   alex: { haircut: [22, 25], skinfade: [27, 45], taper: [24, 35], scissor: [22, 25], beard: [15, 20], hottowel: [25, 40] },
-  arthur: { haircut: [22, 25], skinfade: [27, 45], taper: [24, 35], scissor: [23, 30], beard: [15, 20], hottowel: [25, 40] },
   hamid: { haircut: [20, 25], skinfade: [24, 45], taper: [22, 35], scissor: [21, 30], beard: [13, 20] },
-  saahil: { haircut: [15, 30], taper: [18, 40], scissor: [16, 35], beard: [10, 20] },
 };
 
 export const ADDONS = {
-  beardline: { name: "Beard line-up", price: 8, duration: 10, barbers: ["amir", "alex", "hamid", "arthur"] },
-  hottowelfinish: { name: "Hot towel finish", price: 6, duration: 10, barbers: ["amir", "alex", "arthur"] },
+  beardline: { name: "Beard line-up", price: 8, duration: 10, barbers: ["amir", "alex", "hamid"] },
+  hottowelfinish: { name: "Hot towel finish", price: 6, duration: 10, barbers: ["amir", "alex"] },
 };
 
 // ---- marketing price list -------------------------------------------------

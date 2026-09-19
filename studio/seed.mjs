@@ -62,9 +62,7 @@ const siteSettings = {
 const barbers = [
   { id: "barber-amir", name: "Amir", role: "Owner · Senior Barber", signature: "Amir", note: "Skin fades and cutthroat work. Runs the shop and the bar behind it.", squareTeamMemberId: "", order: 1 },
   { id: "barber-alex", name: "Alex", role: "Barber", signature: "Alex", note: "Scissor work, longer hair, textured crops.", squareTeamMemberId: "", order: 2 },
-  { id: "barber-arthur", name: "Arthur", role: "Barber", signature: "Arthur", note: "Classic cuts, tapers and beard shaping.", squareTeamMemberId: "", order: 3 },
-  { id: "barber-hamid", name: "Hamid", role: "Junior Barber", signature: "Hamid", note: "Fades taken clean to the skin. Fast, never rushed.", squareTeamMemberId: "", order: 4 },
-  { id: "barber-saahil", name: "Saahil", role: "Apprentice Barber", signature: "Saahil", note: "Crops, tapers and hot towel shaves.", squareTeamMemberId: "", order: 5 },
+  { id: "barber-hamid", name: "Hamid", role: "Junior Barber", signature: "Hamid", note: "Fades taken clean to the skin. Fast, never rushed.", squareTeamMemberId: "", order: 3 },
 ];
 
 const services = [
