@@ -2,12 +2,50 @@
 
 React + Vite site for the Hair Hood barbershop, built from the Claude Design
 Canvas mockup in [`Claude Design Mockup/`](./Claude%20Design%20Mockup). Content
-is served from Sanity, booking runs through Square, and it deploys to
-Cloudflare Pages (static assets + serverless Functions for the API routes
-that need secret keys).
+is served from Sanity, booking runs through Square, and it's *meant* to
+deploy to Cloudflare (static assets + serverless Functions for the API
+routes that need secret keys) — see the infrastructure status below before
+assuming any of that is actually working.
 
-**Live:** https://hairhood-website.pages.dev
 **Edit content:** https://hairhood.sanity.studio
+
+## ⚠️ Infrastructure status — read this before touching deploys
+
+As of 2026-09-19, this repo **has never successfully deployed anywhere**.
+Ground truth, confirmed directly against the Cloudflare account (id
+`ebc9ea50d0e2e9123136f0c3ff353218`, GitHub repo `IC31-AT/hairhood`):
+
+- **No Cloudflare Pages project exists on this account at all**
+  (`npx wrangler pages project list` returns empty). The `pages_build_output_dir`
+  key in `wrangler.jsonc` and the old `wrangler pages deploy
+  --project-name=hairhood-website` instructions later in this file describe
+  the *original plan*, not anything that currently exists.
+- **A Cloudflare Worker named `hairhood` exists instead**, created via the
+  dashboard's "Import a Git repository" wizard, reachable only at its default
+  subdomain **`https://hairhood.ishaan-chauhan.workers.dev`** (no custom
+  domain or route is bound to it). GitHub CI ("Workers Builds") is connected
+  to this repo's `main` branch and successfully runs `npm run build`
+  (vite) on every push, but every deploy step has failed — first
+  `wrangler deploy` (wrong command for a project configured with
+  `pages_build_output_dir`), then `wrangler pages deploy` (no Pages project
+  to deploy to), with API-token permission gaps compounding both.
+- **That Worker is currently serving a completely different, unrelated
+  codebase** — a real, content-complete Next.js build of the Hair Hood site
+  (`<title>Hair Hood — Barbershop, Whiteladies Road, Bristol</title>`,
+  matching real shop copy), sharing the same Sanity project (`ep0gakki`) but
+  otherwise nothing to do with this repo. Its origin is unconfirmed — possibly
+  an agency/previous-developer build. **Do not overwrite it without
+  confirming with the site owner first.**
+
+**Open decision before deploy will work at all:** either (a) create the
+classic Pages project this repo's code assumes (matches `functions/api/**`
+Pages Functions as-is, no code changes needed), or (b) convert to a real
+Workers-with-static-assets deploy (`assets.directory` in `wrangler.jsonc`,
+`wrangler deploy`, and rewrite `functions/api/**` as a single Worker fetch
+handler, since Pages Functions' file-based routing doesn't work under plain
+Workers). Nothing below this point in the README has been verified to
+actually work end-to-end — treat the "Deploying" section as aspirational
+until this is resolved.
 
 ## Architecture
 
@@ -63,15 +101,17 @@ npx wrangler pages dev dist
 
 ## Deploying
 
-Both are already set up (project + Studio hostname exist); this is what a
-redeploy looks like:
+**See the infrastructure status section at the top of this file first** —
+the site deploy path below is not currently working; `hairhood-website` is
+not a real Pages project. The Studio deploy (bottom command) is unaffected
+and does work.
 
 ```bash
-# Site
+# Site — NOT CURRENTLY WORKING, see status section above
 npm run build
 npx wrangler pages deploy dist --project-name=hairhood-website
 
-# Studio (only needed when studio/schemaTypes changes)
+# Studio (only needed when studio/schemaTypes changes) — this one's fine
 cd studio && npx sanity deploy
 ```
 
